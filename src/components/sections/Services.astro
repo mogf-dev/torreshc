@@ -1,0 +1,149 @@
+---
+// src/components/sections/Services.astro
+import SectionHeader from "@ui/SectionHeader.astro";
+import ServicesItem from "@ui/ServicesItem.astro";
+import { services } from "@data/services";
+---
+
+<section id="services" class="py-24 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 flex flex-col gap-12">
+    <!-- Header row -->
+    <div
+      class="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+    >
+      <SectionHeader
+        align="left"
+        badge="Our services"
+        title="Everything your project needs"
+        description="From concept to completion — we manage every phase with the same level of care."
+      />
+
+      <!-- Controls -->
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <span
+          id="carousel-counter"
+          class="text-sm text-dark/40 tabular-nums min-w-[3ch]"
+        >
+          1 / {services.length}
+        </span>
+        <button
+          id="prev-btn"
+          aria-label="Previous service"
+          class="carousel-btn w-10 h-10 rounded-full border border-dark/15 flex items-center justify-center text-dark/50 hover:border-dark/40 hover:text-dark hover:bg-dark/5 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="10,3 5,8 10,13"></polyline>
+          </svg>
+        </button>
+        <button
+          id="next-btn"
+          aria-label="Next service"
+          class="carousel-btn w-10 h-10 rounded-full bg-primary border border-primary flex items-center justify-center text-white hover:bg-primary/90 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6,3 11,8 6,13"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Carousel track -->
+    <div class="relative">
+      <div
+        id="carousel-track"
+        class="flex gap-5 transition-transform duration-500 ease-in-out will-change-transform"
+      >
+        {services.map((service) => <ServicesItem service={service} />)}
+      </div>
+    </div>
+
+    <!-- Progress dots -->
+    <div class="flex justify-center gap-2">
+      {
+        services.map((_, i) => (
+          <button
+            class="dot w-1.5 h-1.5 rounded-full bg-dark/20 transition-all duration-300"
+            data-index={i}
+            aria-label={`Go to service ${i + 1}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById("carousel-track") as HTMLElement;
+  const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
+  const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
+  const counter = document.getElementById("carousel-counter") as HTMLElement;
+  const dots = document.querySelectorAll<HTMLButtonElement>(".dot");
+
+  const total = dots.length;
+  let current = 0;
+
+  function getCardWidth(): number {
+    const card = track.querySelector<HTMLElement>(".service-card");
+    if (!card) return 0;
+    return card.offsetWidth + 20; // card width + gap
+  }
+
+  function goTo(index: number) {
+    current = Math.max(0, Math.min(index, total - 1));
+    const offset = getCardWidth() * current;
+    track.style.transform = `translateX(-${offset}px)`;
+
+    counter.textContent = `${current + 1} / ${total}`;
+
+    dots.forEach((d, i) => {
+      const active = i === current;
+      d.classList.toggle("bg-primary", active);
+      d.classList.toggle("w-4", active);
+      d.classList.toggle("bg-dark/20", !active);
+      d.classList.toggle("w-1.5", !active);
+    });
+
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  prevBtn.addEventListener("click", () => goTo(current - 1));
+  nextBtn.addEventListener("click", () => goTo(current + 1));
+  dots.forEach((d) =>
+    d.addEventListener("click", () => goTo(Number(d.dataset.index))),
+  );
+
+  // Touch / swipe
+  let startX = 0;
+  track.addEventListener(
+    "touchstart",
+    (e) => {
+      startX = e.touches[0].clientX;
+    },
+    { passive: true },
+  );
+  track.addEventListener("touchend", (e) => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+  });
+
+  goTo(0);
+</script>

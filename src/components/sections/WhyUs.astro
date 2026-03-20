@@ -1,0 +1,65 @@
+---
+// src/components/sections/WhyUs.astro
+import SectionHeader from "@ui/SectionHeader.astro";
+import BentoItem from "@ui/BentoItem.astro";
+---
+
+<section id="why-us" class="py-24 bg-bg">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 flex flex-col gap-14">
+    <!-- Header -->
+    <div class="flex justify-center">
+      <SectionHeader
+        badge="Why choose us"
+        title="Quality you can see from the first brick"
+        description="Every project is a promise. Here's why homeowners and businesses trust Torres to get it right."
+      />
+    </div>
+
+    <!-- Bento Grid -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-rows-auto"
+    >
+      <!-- Large cell: span 2 cols -->
+      <BentoItem
+        variant="dark"
+        span="md:col-span-2"
+        icon="🏗️"
+        title="Built on trust since day one"
+        description="Founded in 2022 with a clear mission: deliver high-quality construction without the headaches. In just a few years we've grown into a team families and businesses call first."
+        stat="2022"
+        statLabel="Year founded"
+      />
+
+      <!-- Guarantee -->
+      <BentoItem
+        icon="🛡️"
+        title="Written guarantees"
+        description="Fixed-price contracts with locked timelines. No surprise invoices, no scope creep — just what we agreed."
+      />
+
+      <!-- Projects -->
+      <BentoItem
+        variant="accent"
+        icon="📐"
+        title="150+ projects completed"
+        description="From single-room renovations to full custom builds. A growing portfolio that speaks louder than any sales pitch."
+        stat="+150"
+        statLabel="Projects delivered"
+      />
+
+      <!-- Team -->
+      <BentoItem
+        icon="👷"
+        title="Certified team"
+        description="Licensed engineers, architects, and skilled tradespeople. Every site is supervised end-to-end for quality and safety."
+      />
+
+      <!-- Materials -->
+      <BentoItem
+        icon="🧱"
+        title="Premium materials only"
+        description="We source from vetted suppliers and use the right material for every application — no shortcuts, ever."
+      />
+    </div>
+  </div>
+</section>
