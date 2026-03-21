@@ -198,9 +198,14 @@ const categories = [
     class="md:hidden absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl flex flex-col shadow-2xl"
     style="max-height:90dvh; height:90dvh;"
   >
-    <!-- Handle -->
-    <div class="flex justify-center pt-3 pb-2 shrink-0">
-      <div class="w-10 h-1 bg-dark/15 rounded-full"></div>
+    <!-- Handle — tap or drag down to close -->
+    <div
+      id="sheet-handle"
+      class="flex justify-center pt-3 pb-2 shrink-0 cursor-pointer active:opacity-60"
+      aria-label="Close"
+      role="button"
+    >
+      <div class="w-10 h-1 bg-dark/20 rounded-full"></div>
     </div>
 
     <!-- Filters -->
@@ -296,6 +301,11 @@ const categories = [
     transform: translateY(0);
   }
 
+  /* Backdrop fades in/out smoothly */
+  #gallery-backdrop {
+    transition: opacity 0.3s ease;
+  }
+
   /* Lock body scroll */
   body.modal-open {
     position: fixed;
@@ -326,6 +336,7 @@ const categories = [
   const modal = document.getElementById("gallery-modal")!;
   const backdrop = document.getElementById("gallery-backdrop")!;
   const sheet = document.getElementById("gallery-sheet")!;
+  const sheetHandle = document.getElementById("sheet-handle")!;
   const closeDesktop = document.getElementById("close-desktop")!;
   const closeMobile = document.getElementById("close-mobile")!;
   const filterBtns =
@@ -337,39 +348,36 @@ const categories = [
   // Start hidden
   modal.style.display = "none";
 
+  // ── Open ───────────────────────────────────────────────
   function openModal() {
     savedScrollY = window.scrollY;
     document.body.style.top = `-${savedScrollY}px`;
     document.body.classList.add("modal-open");
-
-    // Use position:relative wrapper visible as flex container
     modal.style.display = "flex";
 
-    // Backdrop
     requestAnimationFrame(() => {
       backdrop.style.opacity = "1";
-    });
-
-    // Sheet slides up — needs two rAF so browser paints first
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        sheet.classList.add("open");
-      });
+      requestAnimationFrame(() => sheet.classList.add("open"));
     });
 
     filterBtns[0]?.click();
   }
 
+  // ── Close ──────────────────────────────────────────────
   function closeModal() {
+    // 1. Backdrop fades out
     backdrop.style.opacity = "0";
     backdrop.style.pointerEvents = "none";
+
+    // 2. Sheet slides down
     sheet.classList.remove("open");
 
-    // Hide after sheet slides out
+    // 3. Hide wrapper only after CSS transition finishes (380ms)
     setTimeout(() => {
       modal.style.display = "none";
-    }, 400);
+    }, 380);
 
+    // 4. Restore page scroll immediately (feels snappier)
     document.body.classList.remove("modal-open");
     document.body.style.top = "";
     window.scrollTo({ top: savedScrollY, behavior: "instant" });
@@ -379,15 +387,38 @@ const categories = [
   closeDesktop.addEventListener("click", closeModal);
   closeMobile.addEventListener("click", closeModal);
 
-  // Desktop: click backdrop to close
-  backdrop.addEventListener("click", (e) => {
+  // Handle tap → close
+  sheetHandle.addEventListener("click", closeModal);
+
+  // Handle drag-down → close (touch)
+  let dragStartY = 0;
+  sheetHandle.addEventListener(
+    "touchstart",
+    (e) => {
+      dragStartY = e.touches[0].clientY;
+    },
+    { passive: true },
+  );
+  sheetHandle.addEventListener(
+    "touchend",
+    (e) => {
+      const delta = e.changedTouches[0].clientY - dragStartY;
+      if (delta > 40) closeModal(); // swiped down 40px+
+    },
+    { passive: true },
+  );
+
+  // Desktop backdrop click → close
+  backdrop.addEventListener("click", () => {
     if (window.innerWidth >= 768) closeModal();
   });
 
+  // Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeModal();
   });
 
+  // Filters
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const cat = btn.dataset.cat!;
