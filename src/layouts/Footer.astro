@@ -1,0 +1,32 @@
+---
+// src/components/sections/Footer.astro
+import Icon from "@ui/Icon.astro";
+
+const startYear = 2022;
+const year = new Date().getFullYear();
+const yearRange = year > startYear ? `${startYear}–${year}` : `${startYear}`;
+---
+
+<footer class="bg-footer border-t border-white/6 text-white">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-8">
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5"
+    >
+      <!-- Left: copyright -->
+      <p class="text-sm text-white/50 sm:text-center">
+        © {yearRange} Torres Construction. All rights reserved.
+      </p>
+
+      <!-- Right: credit -->
+      <p class="text-sm text-white/50 flex items-center gap-1 flex-wrap">
+        Developed with <Icon name="heart" class="text-primary" /> by <a
+          href="https://mogf.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-white/50 transition-colors underline underline-offset-2"
+          >mogf.dev</a
+        >
+      </p>
+    </div>
+  </div>
+</footer>

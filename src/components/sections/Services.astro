@@ -1,7 +1,7 @@
 ---
 // src/components/sections/Services.astro
-import SectionHeader from "@ui/SectionHeader.astro";
-import ServicesItem from "@ui/ServicesItem.astro";
+import Section from "@ui/Section.astro";
+import Card from "@ui/Card.astro";
 import { services } from "@data/services";
 ---
 
@@ -11,7 +11,7 @@ import { services } from "@data/services";
     <div
       class="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
     >
-      <SectionHeader
+      <Section
         align="left"
         badge="Our services"
         title="Everything your project needs"
@@ -19,13 +19,7 @@ import { services } from "@data/services";
       />
 
       <!-- Controls -->
-      <div class="flex items-center gap-3 flex-shrink-0">
-        <span
-          id="carousel-counter"
-          class="text-sm text-dark/40 tabular-nums min-w-[3ch]"
-        >
-          1 / {services.length}
-        </span>
+      <div class="flex items-center gap-3 shrink-0">
         <button
           id="prev-btn"
           aria-label="Previous service"
@@ -66,52 +60,74 @@ import { services } from "@data/services";
     </div>
 
     <!-- Carousel track -->
-    <div class="relative">
+    <div id="carousel-viewport" class="relative overflow-hidden">
       <div
         id="carousel-track"
         class="flex gap-5 transition-transform duration-500 ease-in-out will-change-transform"
       >
-        {services.map((service) => <ServicesItem service={service} />)}
+        {services.map((service) => <Card service={service} />)}
       </div>
     </div>
 
-    <!-- Progress dots -->
-    <div class="flex justify-center gap-2">
-      {
-        services.map((_, i) => (
-          <button
-            class="dot w-1.5 h-1.5 rounded-full bg-dark/20 transition-all duration-300"
-            data-index={i}
-            aria-label={`Go to service ${i + 1}`}
-          />
-        ))
-      }
-    </div>
+    <!-- Progress dots (built by JS) -->
+    <div id="dots-container" class="flex justify-center gap-2"></div>
   </div>
 </section>
 
 <script>
+  const viewport = document.getElementById("carousel-viewport") as HTMLElement;
   const track = document.getElementById("carousel-track") as HTMLElement;
+  const dotsContainer = document.getElementById(
+    "dots-container",
+  ) as HTMLElement;
   const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
   const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
-  const counter = document.getElementById("carousel-counter") as HTMLElement;
-  const dots = document.querySelectorAll<HTMLButtonElement>(".dot");
 
-  const total = dots.length;
   let current = 0;
+  let dots: HTMLButtonElement[] = [];
 
-  function getCardWidth(): number {
+  function cardWidth(): number {
     const card = track.querySelector<HTMLElement>(".service-card");
-    if (!card) return 0;
-    return card.offsetWidth + 20; // card width + gap
+    return card ? card.offsetWidth + 20 : 0;
+  }
+
+  function computeMaxIndex(): number {
+    const cw = cardWidth();
+    if (cw <= 0) return 0;
+    // How many full cards fit (min 1 — on mobile cards are w-full so
+    // cw > viewportWidth and plain floor would give 0)
+    const visible = Math.max(1, Math.floor(viewport.offsetWidth / cw));
+    // Last scrollable index = total cards - visible (minimum 0)
+    return Math.max(
+      0,
+      track.querySelectorAll<HTMLElement>(".service-card").length - visible,
+    );
+  }
+
+  function buildDots(maxIndex: number) {
+    dotsContainer.innerHTML = "";
+    dots = [];
+    for (let i = 0; i <= maxIndex; i++) {
+      const btn = document.createElement("button");
+      btn.className =
+        "dot w-1.5 h-1.5 rounded-full bg-dark/20 transition-all duration-300";
+      btn.setAttribute("aria-label", `Go to slide ${i + 1}`);
+      btn.addEventListener("click", () => goTo(i));
+      dotsContainer.appendChild(btn);
+      dots.push(btn);
+    }
   }
 
   function goTo(index: number) {
-    current = Math.max(0, Math.min(index, total - 1));
-    const offset = getCardWidth() * current;
-    track.style.transform = `translateX(-${offset}px)`;
+    const cw = cardWidth();
+    const max = Math.max(0, track.scrollWidth - viewport.offsetWidth);
+    const maxIndex = computeMaxIndex();
 
-    counter.textContent = `${current + 1} / ${total}`;
+    current = Math.max(0, Math.min(index, maxIndex));
+
+    // Raw offset, capped to max so last slide is flush
+    const offset = Math.min(cw * current, max);
+    track.style.transform = `translateX(-${offset}px)`;
 
     dots.forEach((d, i) => {
       const active = i === current;
@@ -121,17 +137,18 @@ import { services } from "@data/services";
       d.classList.toggle("w-1.5", !active);
     });
 
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current === total - 1;
+    prevBtn.disabled = current <= 0;
+    nextBtn.disabled = current >= maxIndex;
+  }
+
+  function init() {
+    buildDots(computeMaxIndex());
+    goTo(0);
   }
 
   prevBtn.addEventListener("click", () => goTo(current - 1));
   nextBtn.addEventListener("click", () => goTo(current + 1));
-  dots.forEach((d) =>
-    d.addEventListener("click", () => goTo(Number(d.dataset.index))),
-  );
 
-  // Touch / swipe
   let startX = 0;
   track.addEventListener(
     "touchstart",
@@ -145,5 +162,18 @@ import { services } from "@data/services";
     if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
   });
 
-  goTo(0);
+  window.addEventListener(
+    "resize",
+    () => {
+      buildDots(computeMaxIndex());
+      goTo(Math.min(current, computeMaxIndex()));
+    },
+    { passive: true },
+  );
+
+  if (document.readyState === "complete") {
+    init();
+  } else {
+    window.addEventListener("load", init);
+  }
 </script>

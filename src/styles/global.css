@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #FF4D2D;
+  --color-primary: #dd2619;
   --color-dark: #1a2f37;
   --color-bg: #F5F5F5;
   --color-surface: #FFFFFF;
   --color-muted: #6B7280;
   --color-border: #E5E7EB;
+  --color-footer: #0E1E25;
 
-  --font-sans: "Inter Variable", sans-serif;
-  --font-serif: "Playfair Display Variable", serif;
+  --font-sans: 'Inter Variable', sans-serif;
+  --font-serif: 'DM Serif Display', serif;
 
   --radius-lg: 10px;
 }
@@ -33,7 +34,7 @@ button {
 }
 
 ::selection {
-  background: #FF4D2D;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-surface);
 }
 

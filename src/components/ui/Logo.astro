@@ -3,9 +3,12 @@ import logo from "@/assets/logo.svg";
 
 interface Props {
   size?: number;
+  variant?: "light" | "dark";
 }
 
-const { size = 20 } = Astro.props;
+const { size = 20, variant = "dark" } = Astro.props;
+
+const textColor = variant === "light" ? "text-white" : "text-dark";
 ---
 
 <div class="flex items-center gap-1" style={`--logo-size:${size}px`}>
@@ -18,7 +21,7 @@ const { size = 20 } = Astro.props;
 
   <span
     translate="no"
-    class="flex items-center font-bold tracking-tight leading-none text-dark"
+    class={`flex items-center font-bold leading-none font-serif ${textColor}`}
     style={`font-size:${size * 1.1}px`}
   >
     torres<span class="text-primary">.</span>

@@ -1,4 +1,7 @@
-// Cloudinary example: https://res.cloudinary.com/YOUR_CLOUD/image/upload/w_800,h_480,c_fill/photo.jpg
+// src/data/services.ts
+// Replace Unsplash placeholders with your real images.
+// Cloudinary: https://res.cloudinary.com/YOUR_CLOUD/image/upload/w_800,h_480,c_fill/photo.jpg
+
 export interface Service {
   id: number;
   title: string;
@@ -10,56 +13,47 @@ export interface Service {
 export const services: Service[] = [
   {
     id: 1,
-    title: "Residential Construction",
+    title: "Drywall",
     description:
-      "We build custom homes and multi-family units to the highest standards — from foundation to final finishes, every detail is handled with care.",
-    highlights: ["Custom floor plans", "Certified materials", "On-time delivery"],
+      "Professional drywall installation and finishing for new builds and renovations. Smooth, durable walls ready for any finish.",
+    highlights: ["New construction", "Repairs & patching", "Texture matching"],
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=480&q=80",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&h=480&q=80",
   },
   {
     id: 2,
-    title: "Remodeling & Renovation",
+    title: "Painting",
     description:
-      "We transform living spaces with additions and makeovers that breathe new life into your home without losing its character.",
-    highlights: ["3D design preview", "Minimal disruption", "Fixed-price quotes"],
-    image:
-      "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?auto=format&fit=crop&w=800&h=480&q=80",
-  },
-  {
-    id: 3,
-    title: "Finishes & Painting",
-    description:
-      "Premium flooring, tiling, wallpaper, and paint. The right finishes make every room feel intentional and polished.",
-    highlights: ["Wide material catalog", "Expert craftsmanship", "Custom color matching"],
+      "Interior and exterior painting with premium materials. Clean lines, lasting color, and a finish that makes every room feel brand new.",
+    highlights: ["Interior & exterior", "Custom color matching", "Prep & priming included"],
     image:
       "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&h=480&q=80",
   },
   {
-    id: 4,
-    title: "Electrical & Plumbing",
+    id: 3,
+    title: "Flooring",
     description:
-      "Safe, code-compliant electrical, plumbing, and water systems. Our licensed technicians handle every installation with precision.",
-    highlights: ["Licensed electricians", "Installation warranty", "Preventive maintenance"],
+      "Hardwood, LVP, tile, and more — installed with precision. We handle subfloor prep through final polish so every step feels right.",
+    highlights: ["Hardwood & LVP", "Tile & stone", "Subfloor preparation"],
     image:
-      "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&h=480&q=80",
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&h=480&q=80",
+  },
+  {
+    id: 4,
+    title: "Carpentry",
+    description:
+      "Custom trim, built-ins, cabinetry, and structural framing. Expert craftsmanship that adds detail, function, and character to any space.",
+    highlights: ["Trim & molding", "Custom built-ins", "Structural framing"],
+    image:
+      "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=800&h=480&q=80",
   },
   {
     id: 5,
-    title: "Interior Design",
+    title: "Renovations",
     description:
-      "Functional, beautiful spaces designed around your lifestyle. We craft environments that reflect your personality and taste.",
-    highlights: ["Photorealistic renders", "Furniture consultation", "Lighting design"],
+      "Full-scope home and commercial renovations managed from start to finish. One team, one point of contact, zero headaches.",
+    highlights: ["Kitchen & bath remodels", "Whole-home renovation", "Commercial fit-outs"],
     image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&h=480&q=80",
-  },
-  {
-    id: 6,
-    title: "Commercial Builds",
-    description:
-      "Retail spaces, offices, and corporate buildings built for productivity and aligned to your brand identity.",
-    highlights: ["Technical permitting", "Brand-aligned design", "Executive timelines"],
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&h=480&q=80",
+      "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?auto=format&fit=crop&w=800&h=480&q=80",
   },
 ];

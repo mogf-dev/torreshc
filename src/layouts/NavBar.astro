@@ -14,7 +14,7 @@ const links = [
 
 <header
   id="navbar"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/70 backdrop-blur-xl"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white"
 >
   <nav
     class="mx-auto max-w-7xl px-5 md:px-10 h-16 flex items-center justify-between"
@@ -96,16 +96,16 @@ const links = [
   function updateNav() {
     if (window.scrollY > 20) {
       navbar.classList.add(
-        "bg-white/95",
-        "backdrop-blur-md",
+        "bg-white/80",
+        "backdrop-blur-xl",
         "shadow-sm",
         "border-b",
         "border-dark/8",
       );
     } else {
       navbar.classList.remove(
-        "bg-white/95",
-        "backdrop-blur-md",
+        "bg-white/80",
+        "backdrop-blur-xl",
         "shadow-sm",
         "border-b",
         "border-dark/8",

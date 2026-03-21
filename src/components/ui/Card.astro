@@ -1,75 +1,46 @@
 ---
+import type { Service } from "@data/services";
+
 interface Props {
-  class?: string;
-  delay?: number;
-  reveal?: boolean;
-  interactive?: boolean;
+  service: Service;
 }
 
-const { 
-  class: className, 
-  delay = 0, 
-  reveal = true, 
-  interactive = true 
-} = Astro.props;
+const { service } = Astro.props;
 ---
 
-<div 
-  class:list={[
-    "card-base", 
-    reveal && "reveal-on-scroll", 
-    interactive && "is-interactive",
-    className // Aquí es donde entra "feat-item"
-  ]} 
-  style={delay ? `--delay: ${delay}ms` : ''}
+<article
+  class="service-card flex-shrink-0 w-full md:w-[520px] bg-white rounded-2xl overflow-hidden border border-dark/8 shadow-sm group"
 >
-  <slot />
-</div>
+  <div class="relative h-64 overflow-hidden">
+    <img
+      src={service.image}
+      alt={service.title}
+      loading="lazy"
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent">
+    </div>
+    <span
+      class="absolute bottom-4 left-5 text-white text-xl font-bold tracking-tight"
+    >
+      {service.title}
+    </span>
+  </div>
 
-<script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("revealed");
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
+  <div class="p-6 flex flex-col gap-4">
+    <p class="text-dark/65 text-sm leading-relaxed">
+      {service.description}
+    </p>
 
-// Observa las cards propias, no .feat-item
-document.querySelectorAll(".reveal-on-scroll").forEach((el, i) => {
-  (el as HTMLElement).style.transitionDelay = `${i * 80}ms`;
-  observer.observe(el);
-});
-</script>
-
-<style>
-  .card-base {
-    background: color-mix(in srgb, var(--text) 3%, transparent);
-    border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: 
-    opacity 0.6s ease var(--delay, 0ms), 
-    transform 0.6s ease var(--delay, 0ms), 
-    border-color 0.2s ease, 
-    background 0.2s ease;
-  }
-
-  .is-interactive:hover {
-    border-color: color-mix(in srgb, var(--brand) 30%, transparent);
-    background: color-mix(in srgb, var(--text) 5%, transparent);
-    transform: translateY(-2px);
-    cursor: pointer;
-  }
-
-  .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .reveal-on-scroll.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
+    <ul class="flex flex-col gap-2">
+      {
+        service.highlights.map((h) => (
+          <li class="flex items-center gap-2 text-sm text-dark/80">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+            {h}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>
