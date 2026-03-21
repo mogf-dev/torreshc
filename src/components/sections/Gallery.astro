@@ -96,14 +96,14 @@ const categories = [
 <!-- ── LIGHTBOX MODAL ─────────────────────────────────────────────────── -->
 <div
   id="gallery-modal"
-  class="fixed inset-0 z-100 bg-dark/60 backdrop-blur-sm hidden items-center justify-center p-4 md:p-8"
+  class="fixed inset-0 z-[100] bg-dark/60 backdrop-blur-sm hidden items-center justify-center p-4 md:p-8"
   role="dialog"
   aria-modal="true"
   aria-label="Photo gallery"
 >
   <!-- Panel -->
   <div
-    class="relative bg-[#1a1a1a] rounded-2xl w-full max-w-6xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+    class="relative bg-dark rounded-2xl w-full max-w-6xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl"
   >
     <!-- Modal header -->
     <div
@@ -199,9 +199,13 @@ const categories = [
     color: #111111;
   }
 
-  /* Prevent body scroll when modal open */
+  /* Prevent body scroll when modal open — position:fixed keeps the page
+     in place while overflow:hidden locks it. The JS saves/restores scrollY. */
   body.modal-open {
-    overflow: hidden;
+    position: fixed;
+    left: 0;
+    right: 0;
+    overflow-y: scroll; /* keep scrollbar gutter so layout doesn't shift */
   }
 </style>
 
@@ -213,19 +217,25 @@ const categories = [
   const filterBtns =
     document.querySelectorAll<HTMLButtonElement>(".modal-filter-btn");
 
-  // Open
+  let savedScrollY = 0;
+
+  // Open — save scroll position, lock body in place
   openBtn.addEventListener("click", () => {
+    savedScrollY = window.scrollY;
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.classList.add("modal-open");
     modal.classList.remove("hidden");
     modal.classList.add("flex");
-    document.body.classList.add("modal-open");
     filterBtns[0]?.click();
   });
 
-  // Close
+  // Close — restore scroll position exactly
   function closeModal() {
     modal.classList.add("hidden");
     modal.classList.remove("flex");
     document.body.classList.remove("modal-open");
+    document.body.style.top = "";
+    window.scrollTo({ top: savedScrollY, behavior: "instant" });
   }
 
   closeBtn.addEventListener("click", closeModal);
