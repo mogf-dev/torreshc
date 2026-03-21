@@ -1,6 +1,5 @@
-//src: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=600&h=420&q=80",
-//src: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=600&h=800&q=80",
-//src: "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?auto=format&fit=crop&w=600&h=460&q=80",
+// src/data/gallery.ts
+
 export interface GalleryItem {
   id: number;
   src: string;
@@ -9,244 +8,244 @@ export interface GalleryItem {
 }
 
 export const gallery: GalleryItem[] = [
-  {
-    id: 1,
+  { 
+    id: 1, 
     src: "/images/01.webp",
-    alt: "Drywall installation in progress",
-    category: "Drywall",
+    alt: "New drywall panels installed in residential room",                    
+    category: "Drywall" 
   },
-  {
-    id: 2,
+  { 
+    id: 2, 
     src: "/images/02.webp",
-    alt: "Smooth drywall finish ready for paint",
-    category: "Carpentry",
+    alt: "Custom wood trim and molding detail in living area",                  
+    category: "Carpentry" 
   },
-  {
-    id: 3,
+  { 
+    id: 3, 
     src: "/images/03.webp",
-    alt: "Interior painting — living room accent wall",
-    category: "Painting",
+    alt: "Fresh interior paint — warm neutral tones in living room",           
+    category: "Painting" 
   },
-  {
-    id: 4,
+  { 
+    id: 4, 
     src: "/images/04.webp",
-    alt: "Exterior house painting project",
-    category: "Renovations",
+    alt: "Full kitchen and living area renovation completed",                   
+    category: "Renovations" 
   },
-  {
-    id: 5,
+  { 
+    id: 5, 
     src: "/images/05.webp",
-    alt: "Hardwood flooring installation",
-    category: "Painting",
+    alt: "Accent wall painted in deep color — bedroom project",                 
+    category: "Painting" 
   },
-  {
-    id: 6,
+  { 
+    id: 6, 
     src: "/images/06.webp",
-    alt: "Large-format tile flooring",
-    category: "Renovations",
+    alt: "Bathroom gut renovation with new fixtures and tile",                  
+    category: "Renovations" 
   },
-  {
-    id: 7,
+  { 
+    id: 7, 
     src: "/images/07.webp",
-    alt: "Custom built-in shelving unit",
-    category: "Flooring",
+    alt: "Luxury vinyl plank flooring installed in open living space",          
+    category: "Flooring" 
   },
-  {
-    id: 8,
+  { 
+    id: 8, 
     src: "/images/08.webp",
-    alt: "Crown molding and trim detail",
-    category: "Flooring",
+    alt: "Large-format porcelain tile laid in modern kitchen",                  
+    category: "Flooring" 
   },
-  {
-    id: 9,
+  { 
+    id: 9, 
     src: "/images/09.webp",
-    alt: "Full bathroom renovation",
-    category: "Carpentry",
+    alt: "Built-in cabinetry and shelving unit in home office",                 
+    category: "Carpentry" 
   },
-  {
+  { 
     id: 10,
     src: "/images/10.webp",
-    alt: "Kitchen renovation — before and after",
-    category: "Flooring",
+    alt: "Hardwood flooring refinished and reinstalled in hallway",             
+    category: "Flooring" 
   },
-  {
+  { 
     id: 11,
     src: "/images/11.webp",
-    alt: "Drywall installation in progress",
-    category: "Flooring",
+    alt: "Wide-plank engineered wood flooring in master bedroom",               
+    category: "Flooring" 
   },
-  {
+  { 
     id: 12,
     src: "/images/12.webp",
-    alt: "Smooth drywall finish ready for paint",
-    category: "Carpentry",
+    alt: "Floating shelves and custom closet built-ins installed",              
+    category: "Carpentry" 
   },
-  {
+  { 
     id: 13,
     src: "/images/13.webp",
-    alt: "Interior painting — living room accent wall",
-    category: "Painting",
+    alt: "Two-tone exterior paint — house refresh in NC neighborhood",          
+    category: "Painting" 
   },
-  {
+  { 
     id: 14,
     src: "/images/14.webp",
-    alt: "Exterior house painting project",
-    category: "Renovations",
+    alt: "Open-concept renovation — walls removed and space opened up",         
+    category: "Renovations" 
   },
-  {
+  { 
     id: 15,
     src: "/images/15.webp",
-    alt: "Hardwood flooring installation",
-    category: "Carpentry",
+    alt: "Staircase railing and newel post carpentry detail",                   
+    category: "Carpentry" 
   },
-  {
+  { 
     id: 16,
     src: "/images/16.webp",
-    alt: "Large-format tile flooring",
-    category: "Renovations",
+    alt: "Master bath renovation with freestanding tub and tile surround",      
+    category: "Renovations" 
   },
-  {
+  { 
     id: 17,
     src: "/images/17.webp",
-    alt: "Custom built-in shelving unit",
-    category: "Renovations",
+    alt: "Laundry room remodel with new cabinetry and flooring",                
+    category: "Renovations" 
   },
-  {
+  { 
     id: 18,
     src: "/images/18.webp",
-    alt: "Crown molding and trim detail",
-    category: "Flooring",
+    alt: "Herringbone tile pattern in entryway floor",                          
+    category: "Flooring" 
   },
-  {
+  { 
     id: 19,
     src: "/images/19.webp",
-    alt: "Full bathroom renovation",
-    category: "Renovations",
+    alt: "Complete home renovation — before and after main living area",        
+    category: "Renovations" 
   },
-  {
+  { 
     id: 20,
     src: "/images/20.webp",
-    alt: "Kitchen renovation — before and after",
-    category: "Drywall",
+    alt: "Smooth Level 5 drywall finish in new construction home",              
+    category: "Drywall" 
   },
-  {
+  { 
     id: 21,
     src: "/images/21.webp",
-    alt: "Drywall installation in progress",
-    category: "Renovations",
+    alt: "Commercial space renovation — office buildout in Charlotte",          
+    category: "Renovations" 
   },
-  {
+  { 
     id: 22,
     src: "/images/22.webp",
-    alt: "Smooth drywall finish ready for paint",
-    category: "Renovations",
+    alt: "Bedroom addition renovation with new windows and drywall",            
+    category: "Renovations" 
   },
-  {
+  { 
     id: 23,
     src: "/images/23.webp",
-    alt: "Interior painting — living room accent wall",
-    category: "Painting",
+    alt: "Crisp white paint refresh — trim and walls in family room",           
+    category: "Painting" 
   },
-  {
+  { 
     id: 24,
     src: "/images/24.webp",
-    alt: "Exterior house painting project",
-    category: "Carpentry",
+    alt: "Crown molding installation in formal dining room",                    
+    category: "Carpentry" 
   },
-  {
+  { 
     id: 25,
     src: "/images/25.webp",
-    alt: "Hardwood flooring installation",
-    category: "Drywall",
+    alt: "Drywall patched and finished after plumbing repair",                  
+    category: "Drywall" 
   },
-  {
+  { 
     id: 26,
     src: "/images/26.webp",
-    alt: "Large-format tile flooring",
-    category: "Painting",
+    alt: "Exterior trim painted and refreshed on colonial-style home",          
+    category: "Painting" 
   },
-  {
+  { 
     id: 27,
     src: "/images/27.webp",
-    alt: "Custom built-in shelving unit",
-    category: "Painting",
+    alt: "Kids room painted with custom color and accent detail",               
+    category: "Painting" 
   },
-  {
+  { 
     id: 28,
     src: "/images/28.webp",
-    alt: "Crown molding and trim detail",
-    category: "Drywall",
+    alt: "Ceiling drywall installed and textured in basement conversion",       
+    category: "Drywall" 
   },
-  {
+  { 
     id: 29,
     src: "/images/29.webp",
-    alt: "Full bathroom renovation",
-    category: "Carpentry",
+    alt: "Kitchen cabinet doors and drawer fronts replaced and refinished",     
+    category: "Carpentry" 
   },
-  {
+  { 
     id: 30,
     src: "/images/30.webp",
-    alt: "Kitchen renovation — before and after",
-    category: "Painting",
+    alt: "Garage interior painted floor to ceiling — clean bright finish",      
+    category: "Painting" 
   },
-  {
+  { 
     id: 31,
     src: "/images/31.webp",
-    alt: "Drywall installation in progress",
-    category: "Carpentry",
+    alt: "Wainscoting panels and chair rail installed in dining area",          
+    category: "Carpentry" 
   },
-  {
+  { 
     id: 32,
     src: "/images/32.webp",
-    alt: "Smooth drywall finish ready for paint",
-    category: "Drywall",
+    alt: "Corner bead and joint compound applied for clean drywall seams",      
+    category: "Drywall" 
   },
-  {
+  { 
     id: 33,
     src: "/images/33.webp",
-    alt: "Interior painting — living room accent wall",
-    category: "Painting",
+    alt: "Stairwell and foyer painted with contrasting trim color",             
+    category: "Painting" 
   },
-  {
+  { 
     id: 34,
     src: "/images/34.webp",
-    alt: "Exterior house painting project",
-    category: "Flooring",
+    alt: "Stone look tile installed in bathroom floor and shower",              
+    category: "Flooring" 
   },
-  {
+  { 
     id: 35,
     src: "/images/35.webp",
-    alt: "Hardwood flooring installation",
-    category: "Drywall",
+    alt: "Drywall hung and taped in new home addition",                         
+    category: "Drywall" 
   },
-  {
+  { 
     id: 36,
     src: "/images/36.webp",
-    alt: "Large-format tile flooring",
-    category: "Flooring",
+    alt: "Outdoor patio tile installation — slip-resistant surface",            
+    category: "Flooring" 
   },
-  {
+  { 
     id: 37,
     src: "/images/37.webp",
-    alt: "Custom built-in shelving unit",
-    category: "Drywall",
+    alt: "Arched drywall opening finished smooth between living spaces",        
+    category: "Drywall" 
   },
-  {
+  { 
     id: 38,
     src: "/images/38.webp",
-    alt: "Crown molding and trim detail",
-    category: "Drywall",
+    alt: "Drywall repair after water damage — seamless finish achieved",        
+    category: "Drywall" 
   },
-  {
+  { 
     id: 39,
     src: "/images/39.webp",
-    alt: "Full bathroom renovation",
-    category: "Flooring",
+    alt: "Mosaic tile detail in shower niche and floor",                        
+    category: "Flooring" 
   },
-  {
+  { 
     id: 40,
     src: "/images/40.webp",
-    alt: "Kitchen renovation — before and after",
-    category: "Carpentry",
+    alt: "Custom mudroom built-ins with bench, hooks and storage cubbies",      
+    category: "Carpentry" 
   },
-]
+];
