@@ -1,0 +1,132 @@
+---
+// src/components/sections/CTA.astro
+// Scroll-driven word-reveal CTA — serif headline with primary highlights
+---
+
+<section id="cta" class="cta-section py-32 md:py-44 bg-white overflow-hidden">
+  <div
+    class="max-w-5xl mx-auto px-5 md:px-10 text-center flex flex-col items-center"
+  >
+    <!-- Eyebrow -->
+    <p
+      class="cta-eyebrow text-[11px] uppercase tracking-[0.25em] text-dark/35 font-semibold mb-10 opacity-0"
+    >
+      Ready to build?
+    </p>
+
+    <!-- Headline — each word is a reveal unit -->
+    <h2
+      class="cta-headline font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.15] tracking-tight text-dark"
+    >
+      <span class="word">Your</span>
+      <span class="word">next</span>
+      <span class="word">project</span>
+      <br />
+      <span class="word">deserves</span>
+      <span class="word highlight">the&nbsp;best.</span>
+    </h2>
+
+    <!-- Sub + CTA -->
+    <div class="cta-sub mt-12 flex flex-col items-center gap-6 opacity-0">
+      <p class="text-base text-dark/50 max-w-sm leading-relaxed">
+        No guesswork, no delays — just clean work delivered on time and on
+        budget.
+      </p>
+      <a
+        href="https://wa.me/17042775688"
+        class="cta-btn inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white text-sm font-semibold rounded-full hover:bg-primary/90 transition-all duration-200 hover:gap-3"
+      >
+        Start your project
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M3 8h10M9 4l4 4-4 4"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Playfair Display via @fontsource-variable/playfair-display */
+  .cta-headline {
+    font-family: "Playfair Display Variable", Georgia, serif;
+  }
+
+  /* Words start invisible, slide up */
+  .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s ease;
+    margin-right: 0.22em;
+  }
+
+  .word.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Primary highlight words */
+  .word.highlight {
+    color: var(--color-primary) !important;
+  }
+
+  .cta-eyebrow,
+  .cta-sub {
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+    transform: translateY(16px);
+  }
+
+  .cta-eyebrow.visible,
+  .cta-sub.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Staggered word reveal on scroll
+  const section = document.getElementById("cta")!;
+  const words = section.querySelectorAll<HTMLElement>(".word");
+  const eyebrow = section.querySelector<HTMLElement>(".cta-eyebrow")!;
+  const sub = section.querySelector<HTMLElement>(".cta-sub")!;
+
+  let triggered = false;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting && !triggered) {
+        triggered = true;
+
+        // Eyebrow first
+        setTimeout(() => eyebrow.classList.add("visible"), 0);
+
+        // Then each word with a stagger
+        words.forEach((word, i) => {
+          setTimeout(() => word.classList.add("visible"), 120 + i * 70);
+        });
+
+        // Sub + CTA after all words
+        const totalDelay = 120 + words.length * 70 + 100;
+        setTimeout(() => sub.classList.add("visible"), totalDelay);
+
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.25 },
+  );
+
+  observer.observe(section);
+</script>
