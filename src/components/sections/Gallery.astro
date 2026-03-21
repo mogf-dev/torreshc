@@ -96,14 +96,24 @@ const categories = [
 <!-- ── LIGHTBOX MODAL ─────────────────────────────────────────────────── -->
 <div
   id="gallery-modal"
-  class="fixed inset-0 z-[100] bg-dark/60 backdrop-blur-sm hidden items-center justify-center p-4 md:p-8"
+  class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-8"
   role="dialog"
   aria-modal="true"
   aria-label="Photo gallery"
+  style="background: rgba(10,10,10,0.70);"
 >
+  <!-- Blur overlay: separate persistent element so display:none never kills it -->
+  <div
+    id="gallery-backdrop"
+    class="fixed inset-0 -z-10 opacity-0 transition-opacity duration-300"
+    style="backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);"
+  >
+  </div>
+
   <!-- Panel -->
   <div
-    class="relative bg-dark rounded-2xl w-full max-w-6xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+    class="relative bg-[#1a1a1a] rounded-2xl w-full max-w-6xl flex flex-col overflow-hidden shadow-2xl"
+    style="max-height:min(90dvh,90vh);"
   >
     <!-- Modal header -->
     <div
@@ -146,7 +156,10 @@ const categories = [
     </div>
 
     <!-- Modal grid -->
-    <div class="flex-1 overflow-y-auto px-5 md:px-8 py-6">
+    <div
+      class="flex-1 overflow-y-auto px-5 md:px-8 py-6"
+      style="-webkit-overflow-scrolling:touch;"
+    >
       <div
         id="modal-grid"
         class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"
@@ -219,6 +232,8 @@ const categories = [
 
   let savedScrollY = 0;
 
+  const backdrop = document.getElementById("gallery-backdrop")!;
+
   // Open — save scroll position, lock body in place
   openBtn.addEventListener("click", () => {
     savedScrollY = window.scrollY;
@@ -226,11 +241,14 @@ const categories = [
     document.body.classList.add("modal-open");
     modal.classList.remove("hidden");
     modal.classList.add("flex");
+    // Small delay so the element is painted before blur activates (mobile fix)
+    requestAnimationFrame(() => (backdrop.style.opacity = "1"));
     filterBtns[0]?.click();
   });
 
   // Close — restore scroll position exactly
   function closeModal() {
+    backdrop.style.opacity = "0";
     modal.classList.add("hidden");
     modal.classList.remove("flex");
     document.body.classList.remove("modal-open");
