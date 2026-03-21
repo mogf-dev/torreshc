@@ -1,14 +1,14 @@
 ---
+import Icon from "@ui/Icon.astro";
+
+type IconName = string; // keyof typeof ICONS — usa el tipo exacto si lo tienes
+
 interface Props {
-  /** Emoji o SVG path — se muestra como ícono de apoyo */
-  icon?: string;
+  icon?: IconName;
   title: string;
   description: string;
-  /** Tailwind col/row span classes, e.g. "md:col-span-2" */
   span?: string;
-  /** Variante visual */
   variant?: "default" | "dark" | "accent";
-  /** Stat grande para las celdas destacadas */
   stat?: string;
   statLabel?: string;
 }
@@ -28,6 +28,9 @@ const variantClasses = {
   dark: "bg-dark text-white",
   accent: "bg-primary text-white",
 };
+
+const iconColor =
+  variant === "default" ? "var(--primary)" : "rgba(255,255,255,0.8)";
 ---
 
 <div
@@ -37,7 +40,7 @@ const variantClasses = {
     span,
   ]}
 >
-  <!-- Fondo decorativo sutil -->
+  <!-- Decorative bg on dark variant -->
   {
     variant === "dark" && (
       <div
@@ -47,30 +50,39 @@ const variantClasses = {
     )
   }
 
-  <div class="flex flex-col gap-3 relative z-10">
+  <div class="flex flex-col gap-4 relative z-10">
+    <!-- Icon -->
     {
       icon && (
-        <span class="text-2xl select-none" aria-hidden="true">
-          {icon}
+        <span
+          class:list={[
+            "w-10 h-10 rounded-xl flex items-center justify-center",
+            variant === "default" ? "bg-muted/8" : "bg-white/10",
+          ]}
+        >
+          <Icon name={icon as any} color={iconColor} size={20} />
         </span>
       )
     }
-    <h3
-      class:list={[
-        "text-lg font-semibold leading-snug",
-        variant === "default" ? "text-dark" : "text-white",
-      ]}
-    >
-      {title}
-    </h3>
-    <p
-      class:list={[
-        "text-sm leading-relaxed",
-        variant === "default" ? "text-dark/60" : "text-white/70",
-      ]}
-    >
-      {description}
-    </p>
+
+    <div class="flex flex-col gap-2">
+      <h3
+        class:list={[
+          "text-lg font-semibold leading-snug",
+          variant === "default" ? "text-dark" : "text-white",
+        ]}
+      >
+        {title}
+      </h3>
+      <p
+        class:list={[
+          "text-sm leading-relaxed",
+          variant === "default" ? "text-dark/60" : "text-white/70",
+        ]}
+      >
+        {description}
+      </p>
+    </div>
   </div>
 
   {
