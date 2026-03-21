@@ -14,7 +14,7 @@ const links = [
 
 <header
   id="navbar"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
 >
   <nav
     class="mx-auto max-w-7xl px-5 md:px-10 h-16 flex items-center justify-between"
@@ -67,7 +67,7 @@ const links = [
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="md:hidden hidden bg-white/95 backdrop-blur-md border-t border-dark/8 px-5 pb-5 pt-3"
+    class="md:hidden hidden bg-white/95 backdrop-blur-md border-t border-dark/1 px-5 pb-5 pt-3"
   >
     <ul class="flex flex-col gap-1 mb-4">
       {
@@ -100,7 +100,7 @@ const links = [
         "backdrop-blur-xl",
         "shadow-sm",
         "border-b",
-        "border-dark/8",
+        "border-dark/1",
       );
     } else {
       navbar.classList.remove(
@@ -108,7 +108,7 @@ const links = [
         "backdrop-blur-xl",
         "shadow-sm",
         "border-b",
-        "border-dark/8",
+        "border-dark/1",
       );
     }
   }

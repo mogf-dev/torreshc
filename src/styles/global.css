@@ -17,6 +17,9 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+  touch-action: manipulation;
 }
 
 *,
@@ -25,8 +28,9 @@ html {
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar        { width: 5px; }
-::-webkit-scrollbar-track  { background: transparent; }
+
+::-webkit-scrollbar        { width: 3px; }
+::-webkit-scrollbar-track  { background: var(--color-dark); }
 ::-webkit-scrollbar-thumb  { background: var(--color-primary); border-radius: 4px; }
 
 button {
@@ -35,6 +39,77 @@ button {
 
 ::selection {
   background: var(--color-primary);
-  color: var(--color-surface);
+  color: var(--color-dark);
 }
 
+/* ── Animations ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  @keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.8;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-8px) scale(0.96);
+    opacity: 0;
+  }
+
+  40% {
+    transform: translateY(0) scale(1.02);
+    opacity: 1;
+  }
+
+  55% {
+    transform: translateY(-4px) scale(0.99);
+  }
+
+  70% {
+    transform: translateY(0);
+  }
+
+  82% {
+    transform: translateY(-2px);
+  }
+
+  92% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
