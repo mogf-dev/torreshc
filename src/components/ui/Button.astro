@@ -6,7 +6,7 @@ export interface Props {
   newTab?: boolean;
   fullWidth?: boolean;
   class?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const {
@@ -20,13 +20,15 @@ const {
 } = Astro.props;
 
 const base =
-  "inline-flex items-center justify-center gap-2 px-7 py-2.5 text-sm font-medium rounded-full cursor-pointer no-underline transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] focus-visible:outline focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-2 relative overflow-hidden";
+  "inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-semibold tracking-[0.08em] uppercase rounded-full cursor-pointer no-underline transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-2 relative overflow-hidden";
 
 const variants = {
-  primary: "bg-primary border border-primary text-white shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 hover:bg-primary/95",
-  outline: "bg-dark/5 border border-dark/50 text-dark hover:bg-dark hover:text-white hover:border-dark transition-all duration-300",
+  primary:
+    "bg-primary border border-primary text-white shadow-[0_18px_40px_-20px_rgba(184,92,56,0.9)] hover:shadow-[0_22px_48px_-20px_rgba(184,92,56,0.95)] hover:bg-primary-deep hover:border-primary-deep",
+  outline:
+    "bg-transparent border border-dark/16 text-dark hover:bg-dark hover:text-[var(--color-surface)] hover:border-dark transition-all duration-300",
   ghost:
-    "bg-transparent border-transparent text-dark opacity-50 px-2 hover:bg-dark/5 hover:opacity-100",
+    "bg-transparent border-transparent text-dark/60 opacity-80 px-2 hover:bg-dark/5 hover:text-dark hover:opacity-100",
 };
 
 const classes = [base, variants[variant], fullWidth ? "w-full" : ""].join(" ");

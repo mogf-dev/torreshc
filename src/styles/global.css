@@ -1,19 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #e53037;
-  --color-dark: #152A33;
-  --color-bg: #f7f4ee;
-  --color-surface: #fffdf8;
-  --color-muted: #6f746d;
-  --color-border: #ddd6c8;
-  --color-footer: #0E1E25;
+  --color-primary: #b85c38;
+  --color-primary-deep: #8f4427;
+  --color-accent: #d9aa6b;
+  --color-dark: #1c211d;
+  --color-bg: #f4efe6;
+  --color-surface: #fbf7f1;
+  --color-surface-strong: #f0e6d7;
+  --color-muted: #676257;
+  --color-border: #d9cfbf;
+  --color-footer: #171b18;
 
-  --font-sans: 'Poppins', sans-serif;
-  --font-display: 'Bodoni Moda', serif;
-  --font-serif: 'Bodoni Moda', serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-code: "Manrope", sans-serif;
 
-  --radius-lg: 10px;
+  --radius-lg: 12px;
 }
 
 html {
@@ -42,13 +46,22 @@ button {
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-bg);
+  background:
+    radial-gradient(circle at top left, rgba(217, 170, 107, 0.15), transparent 28%),
+    radial-gradient(circle at top right, rgba(184, 92, 56, 0.12), transparent 24%),
+    var(--color-bg);
   color: var(--color-dark);
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: var(--color-dark);
+  background: var(--color-primary);
   color: var(--color-surface);
+}
+
+a {
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
 }
 
 /* ── Animations ── */

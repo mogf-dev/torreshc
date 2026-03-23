@@ -26,142 +26,145 @@ const stats = [
 
 <section
   id="hero"
-  class="relative bg-[#FAFAF9] overflow-hidden"
+  class="relative overflow-hidden"
   style="min-height: 100svh;"
 >
-  <!-- Subtle grain -->
   <div
-    class="absolute inset-0 opacity-[0.025] pointer-events-none"
+    class="absolute inset-0 opacity-[0.045] pointer-events-none"
     style="background-image:url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');background-size:180px;"
   >
   </div>
 
-  <!-- Ambient orbs -->
   <div
     class="absolute top-0 right-0 w-150 h-150 -translate-y-1/4 translate-x-1/4 rounded-full pointer-events-none"
-    style="background:radial-gradient(circle, rgba(217,119,6,0.12) 0%, transparent 70%);"
+    style="background:radial-gradient(circle, rgba(184,92,56,0.16) 0%, transparent 70%);"
   >
   </div>
   <div
-    class="absolute bottom-20 left-10 w-80 h-80 rounded-full pointer-events-none opacity-40"
-    style="background:radial-gradient(circle, rgba(26,47,55,0.08) 0%, transparent 70%);"
+    class="absolute top-24 left-[8%] h-44 w-44 rounded-[2rem] border border-white/30 pointer-events-none opacity-55 rotate-12"
+    style="background:linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.04));"
   >
   </div>
+  <div
+    class="absolute bottom-12 left-10 w-80 h-80 rounded-full pointer-events-none opacity-45"
+    style="background:radial-gradient(circle, rgba(28,33,29,0.08) 0%, transparent 70%);"
+  ></div>
 
   <div
     class="relative z-10 max-w-7xl mx-auto px-5 md:px-10 grid md:grid-cols-[1fr_auto] gap-10 items-center"
     style="min-height:100svh; padding-top:5rem; padding-bottom:4rem;"
   >
-    <!-- LEFT -->
     <div class="flex flex-col gap-8 max-w-xl">
       <div class="hero-el" style="--d:0.05s">
-        <Badge variant="outline" class="border-dark/20 text-dark/60">USA · Est. 2022</Badge>
+        <Badge
+          variant="outline"
+          class="border-primary/20 bg-white/50 text-dark/65 shadow-[0_12px_30px_-25px_rgba(28,33,29,0.45)] backdrop-blur-sm"
+        >
+          Design-led builds · Est. 2022
+        </Badge>
       </div>
 
       <h1
-        class="hero-el text-[clamp(3rem,6vw,5.5rem)] leading-[1.02] tracking-[-0.04em] text-dark font-display"
+        class="hero-el text-[clamp(3.35rem,6.4vw,6rem)] leading-[0.96] tracking-[-0.045em] text-dark font-display"
         style="--d:0.15s"
       >
-        We build<br />
-        the <span class="text-primary">space</span><br />
-        you imagined.
+        We shape<br />
+        <span class="text-primary">elevated</span><br />
+        living spaces.
       </h1>
 
       <p
-        class="hero-el text-[1.0625rem] text-dark/55 leading-relaxed max-w-104"
+        class="hero-el text-[1.05rem] text-dark/58 leading-relaxed max-w-112"
         style="--d:0.27s"
       >
-        Quality-first construction, remodeling, and interior design. From
-        blueprint to finished space — on time and on budget.
+        Premium remodeling, finish carpentry, drywall, paint, and interior
+        upgrades executed with cleaner details, tighter coordination, and a
+        sharper eye for how a home should feel.
       </p>
 
       <div class="hero-el flex flex-wrap gap-3" style="--d:0.37s">
-        <Button href="#contact" variant="primary">Get a free quote</Button>
-        <Button href="#gallery" variant="outline">See our work</Button>
+        <Button href="#contact" variant="primary">Book a consultation</Button>
+        <Button href="#gallery" variant="outline">View projects</Button>
       </div>
 
-      <!-- Stats -->
       <div
-        class="hero-el grid grid-cols-3 gap-6 pt-2 border-t border-dark/8 mt-2"
+        class="hero-el grid grid-cols-3 gap-6 pt-4 border-t border-dark/8 mt-2"
         style="--d:0.48s"
       >
         {
           stats.map((s) => (
             <div class="flex flex-col gap-1.5">
-              <span class="text-2xl md:text-[2rem] font-black text-dark leading-none tracking-tight">
+              <span class="text-2xl md:text-[2rem] font-semibold text-dark leading-none tracking-tight">
                 {s.value}
               </span>
-              <span class="text-xs text-dark/40 leading-tight">{s.label}</span>
+              <span class="text-[0.7rem] uppercase tracking-[0.16em] text-dark/38 leading-tight">
+                {s.label}
+              </span>
             </div>
           ))
         }
       </div>
     </div>
 
-    <!-- RIGHT COLLAGE -->
     <div
       class="hero-el hidden md:flex gap-4 w-160 xl:w-125"
       style="--d:0.22s; height: min(700px, calc(100svh - 9rem));"
     >
-      <!-- Left tall -->
       <div
-        class="w-80 h-full rounded-2xl overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.18)] relative group"
+        class="w-80 h-full rounded-[2rem] overflow-hidden shadow-[0_30px_80px_-24px_rgba(28,33,29,0.22)] relative group"
       >
         <img
           src={photos[0].src}
           alt={photos[0].alt}
           class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-dark/35 via-transparent to-white/8 opacity-100"></div>
       </div>
 
-      <!-- Right column -->
       <div class="flex flex-col gap-4 w-60 h-full">
-        <!-- Top -->
         <div
-          class="h-1/2 rounded-2xl overflow-hidden shadow-[0_16px_48px_-8px_rgba(0,0,0,0.15)] relative group"
+          class="h-1/2 rounded-[2rem] overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
         >
           <img
             src={photos[1].src}
             alt={photos[1].alt}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent opacity-100"></div>
         </div>
 
-        <!-- Bottom -->
         <div
-          class="h-1/2 rounded-2xl overflow-hidden shadow-[0_16px_48px_-8px_rgba(0,0,0,0.15)] relative group"
+          class="h-1/2 rounded-[2rem] overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
         >
           <img
             src={photos[2].src}
             alt={photos[2].alt}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent opacity-100"></div>
         </div>
       </div>
 
-      <!-- Floating badge -->
       <div
-        class="hero-badge-float absolute left-[58%] top-1/2 -translate-y-1/2 bg-white rounded-xl shadow-[0_8px_32px_-4px_rgba(0,0,0,0.18)] px-4 py-3 flex items-center gap-3 z-20 opacity-0 w-max"
+        class="hero-badge-float absolute left-[54%] top-[58%] -translate-y-1/2 rounded-[1.4rem] border border-white/40 bg-[color:var(--color-surface)]/88 px-5 py-4 flex items-center gap-3 z-20 opacity-0 w-max shadow-[0_22px_60px_-26px_rgba(28,33,29,0.5)] backdrop-blur-md"
       >
         <span
-          class="w-8 h-8 rounded-full bg-primary/12 flex items-center justify-center text-primary text-sm"
-          >✓</span
+          class="w-9 h-9 rounded-full bg-primary/12 flex items-center justify-center text-primary text-sm"
+          >+</span
         >
         <div>
-          <p class="text-xs font-bold text-dark leading-none">
-            Licensed & Insured
+          <p class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-dark/48 leading-none">
+            Signature finish
           </p>
-          <p class="text-[11px] text-dark/45 mt-1">North Carolina</p>
+          <p class="text-sm font-medium text-dark mt-1">
+            Crafted with detail and care
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Scroll hint -->
 <div
   class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-dark/25"
 >
@@ -175,15 +178,6 @@ const stats = [
 </div>
 
 <style>
-<<<<<<< HEAD
-  /* Entrance */
-=======
-  .font-serif,
-  h1.font-serif {
-    font-family: "Playfair Display Variable", Georgia, serif;
-  }
-
->>>>>>> 1cafde3 (Update UI components and add new font)
   .hero-el {
     opacity: 0;
     transform: translateY(20px);

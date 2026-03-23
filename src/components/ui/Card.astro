@@ -18,14 +18,19 @@ const { service } = Astro.props;
       loading="lazy"
       class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-115"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
-    <span
-      class="absolute bottom-4 left-5 text-white text-xl font-bold tracking-tight"
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"
     >
+    </div>
+    <span class="absolute bottom-4 left-5 text-white text-xl tracking-tight">
       {service.title}
     </span>
     <!-- Shine effect -->
-    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style="background:linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);"></div>
+    <div
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+      style="background:linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);"
+    >
+    </div>
   </div>
 
   <div class="p-6 flex flex-col gap-4">
