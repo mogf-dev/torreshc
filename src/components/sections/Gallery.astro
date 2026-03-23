@@ -14,8 +14,11 @@ const categories = [
 ] as const;
 ---
 
-<section id="gallery" class="py-24 bg-[#F7F7F5]">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 flex flex-col gap-12">
+<section id="gallery" class="py-24 bg-[#F7F7F5] relative overflow-hidden">
+  <!-- Ambient gradient -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none opacity-30" style="background:radial-gradient(ellipse at center, rgba(221,38,25,0.06) 0%, transparent 70%);"></div>
+  
+  <div class="max-w-7xl mx-auto px-5 md:px-10 flex flex-col gap-12 relative z-10">
     <!-- Header -->
     <div
       class="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
@@ -44,16 +47,18 @@ const categories = [
                 src={item.src}
                 alt={item.alt}
                 loading="lazy"
-                class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
-              <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition-all duration-300 flex items-end p-4">
-                <span class="text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+              <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
+                <span class="text-white text-sm font-medium translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                   {item.alt}
                 </span>
               </div>
-              <span class="absolute top-3 left-3 px-2.5 py-0.5 bg-white/90 text-dark text-[11px] font-semibold rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="absolute top-3 left-3 px-2.5 py-0.5 bg-white/90 text-dark text-[11px] font-semibold rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
                 {item.category}
               </span>
+              <!-- Corner accent -->
+              <div class="absolute top-0 right-0 w-12 h-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background:linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.3) 50%);"></div>
             </div>
           ))
         }
@@ -71,7 +76,7 @@ const categories = [
     <div class="flex justify-center -mt-4">
       <button
         id="open-gallery-btn"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-dark text-white text-sm font-medium rounded-full hover:bg-dark/85 transition-colors duration-200"
+        class="group inline-flex items-center gap-2 px-7 py-3 bg-dark text-white text-sm font-medium rounded-full hover:bg-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/25"
       >
         View all projects
         <svg
@@ -83,6 +88,7 @@ const categories = [
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          class="transition-transform duration-300 group-hover:translate-x-1"
         >
           <path d="M3 8h10M9 4l4 4-4 4"></path>
         </svg>

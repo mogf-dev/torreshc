@@ -20,13 +20,13 @@ const {
 } = Astro.props;
 
 const base =
-  "inline-flex items-center justify-center gap-2 px-6 py-2 text-sm font-medium rounded-full cursor-pointer no-underline transition-all duration-200 hover:opacity-90 hover:scale-[1.03] active:scale-[0.96] focus-visible:outline focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-2";
+  "inline-flex items-center justify-center gap-2 px-7 py-2.5 text-sm font-medium rounded-full cursor-pointer no-underline transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] focus-visible:outline focus-visible:outline-1 focus-visible:outline-primary focus-visible:outline-offset-2 relative overflow-hidden";
 
 const variants = {
-  primary: "bg-primary border border-primary text-white",
-  outline: "bg-dark/5 border border-dark/50 text-dark",
+  primary: "bg-primary border border-primary text-white shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 hover:bg-primary/95",
+  outline: "bg-dark/5 border border-dark/50 text-dark hover:bg-dark hover:text-white hover:border-dark transition-all duration-300",
   ghost:
-    "bg-transparent border-transparent text-dark opacity-50 px-2 hover:bg-dark/5",
+    "bg-transparent border-transparent text-dark opacity-50 px-2 hover:bg-dark/5 hover:opacity-100",
 };
 
 const classes = [base, variants[variant], fullWidth ? "w-full" : ""].join(" ");
