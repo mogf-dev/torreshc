@@ -24,11 +24,7 @@ const stats = [
 ];
 ---
 
-<section
-  id="hero"
-  class="relative overflow-hidden"
-  style="min-height: 100svh;"
->
+<section id="hero" class="relative overflow-hidden" style="min-height: 100svh;">
   <div
     class="absolute inset-0 opacity-[0.045] pointer-events-none"
     style="background-image:url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');background-size:180px;"
@@ -41,14 +37,15 @@ const stats = [
   >
   </div>
   <div
-    class="absolute top-24 left-[8%] h-44 w-44 rounded-[2rem] border border-white/30 pointer-events-none opacity-55 rotate-12"
+    class="absolute top-24 left-[8%] h-44 w-44 rounded-4xl border border-white/30 pointer-events-none opacity-55 rotate-12"
     style="background:linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.04));"
   >
   </div>
   <div
     class="absolute bottom-12 left-10 w-80 h-80 rounded-full pointer-events-none opacity-45"
     style="background:radial-gradient(circle, rgba(28,33,29,0.08) 0%, transparent 70%);"
-  ></div>
+  >
+  </div>
 
   <div
     class="relative z-10 max-w-7xl mx-auto px-5 md:px-10 grid md:grid-cols-[1fr_auto] gap-10 items-center"
@@ -74,7 +71,7 @@ const stats = [
       </h1>
 
       <p
-        class="hero-el text-[1.05rem] text-dark/58 leading-relaxed max-w-112"
+        class="hero-el text-[1.05rem] text-dark/58 leading-relaxed max-w-md"
         style="--d:0.27s"
       >
         Premium remodeling, finish carpentry, drywall, paint, and interior
@@ -111,49 +108,60 @@ const stats = [
       style="--d:0.22s; height: min(700px, calc(100svh - 9rem));"
     >
       <div
-        class="w-80 h-full rounded-[2rem] overflow-hidden shadow-[0_30px_80px_-24px_rgba(28,33,29,0.22)] relative group"
+        class="w-80 h-full rounded-4xl overflow-hidden shadow-[0_30px_80px_-24px_rgba(28,33,29,0.22)] relative group"
       >
         <img
           src={photos[0].src}
           alt={photos[0].alt}
           class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-dark/35 via-transparent to-white/8 opacity-100"></div>
+        <div
+          class="absolute inset-0 bg-linear-to-t from-dark/35 via-transparent to-white/8 opacity-100"
+        >
+        </div>
       </div>
 
       <div class="flex flex-col gap-4 w-60 h-full">
         <div
-          class="h-1/2 rounded-[2rem] overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
+          class="h-1/2 rounded-4xl overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
         >
           <img
             src={photos[1].src}
             alt={photos[1].alt}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent opacity-100"></div>
+          <div
+            class="absolute inset-0 bg-linear-to-t from-dark/30 to-transparent opacity-100"
+          >
+          </div>
         </div>
 
         <div
-          class="h-1/2 rounded-[2rem] overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
+          class="h-1/2 rounded-4xl overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
         >
           <img
             src={photos[2].src}
             alt={photos[2].alt}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent opacity-100"></div>
+          <div
+            class="absolute inset-0 bg-linear-to-t from-dark/30 to-transparent opacity-100"
+          >
+          </div>
         </div>
       </div>
 
       <div
-        class="hero-badge-float absolute left-[54%] top-[58%] -translate-y-1/2 rounded-[1.4rem] border border-white/40 bg-[color:var(--color-surface)]/88 px-5 py-4 flex items-center gap-3 z-20 opacity-0 w-max shadow-[0_22px_60px_-26px_rgba(28,33,29,0.5)] backdrop-blur-md"
+        class="hero-badge-float absolute left-[54%] top-[58%] -translate-y-1/2 rounded-[1.4rem] border border-white/40 bg-surface/88 px-5 py-4 flex items-center gap-3 z-20 opacity-0 w-max shadow-[0_22px_60px_-26px_rgba(28,33,29,0.5)] backdrop-blur-md"
       >
         <span
           class="w-9 h-9 rounded-full bg-primary/12 flex items-center justify-center text-primary text-sm"
           >+</span
         >
         <div>
-          <p class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-dark/48 leading-none">
+          <p
+            class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-dark/48 leading-none"
+          >
             Signature finish
           </p>
           <p class="text-sm font-medium text-dark mt-1">
