@@ -36,6 +36,11 @@ const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
   }
 
+  .whatsapp-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
   /* On dark sections: flip to surface (white) */
   .whatsapp-btn.on-dark {
     background-color: var(--color-surface);

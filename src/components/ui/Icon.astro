@@ -9,6 +9,7 @@ interface Props {
   color?: string;
   size?: string | number;
   class?: string;
+  decorative?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   color = "currentColor",
   size = 18,
   class: className = "",
+  decorative = true,
 } = Astro.props;
 
 const icon =
@@ -33,7 +35,10 @@ const style = `
   icon && (
     <span style={style}>
       <Fragment
-        set:html={icon.replace("<svg", `<svg class="${className ?? ""}"`)}
+        set:html={icon.replace(
+          "<svg",
+          `<svg class="${className ?? ""}" ${decorative ? 'aria-hidden="true" focusable="false"' : ""}`,
+        )}
       />
     </span>
   )

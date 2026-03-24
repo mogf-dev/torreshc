@@ -50,6 +50,14 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+main:focus {
+  outline: none;
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 ::selection {
   background: var(--color-primary);
   color: var(--color-surface);
@@ -58,6 +66,18 @@ body {
 a {
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
 
 /* ── Animations ── */
@@ -129,5 +149,20 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

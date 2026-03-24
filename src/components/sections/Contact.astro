@@ -33,9 +33,7 @@ const contactInfo: ContactItem[] = [
   },
 ];
 
-const startYear = 2022;
-const year = new Date().getFullYear();
-const yearRange = year > startYear ? `${startYear}–${year}` : `${startYear}`;
+const isExternalLink = (href: string) => href.startsWith("http");
 ---
 
 <section id="contact" class="bg-dark text-white relative overflow-hidden">
@@ -83,7 +81,7 @@ const yearRange = year > startYear ? `${startYear}–${year}` : `${startYear}`;
       </div>
 
       <!-- Right: contact items -->
-      <div class="flex flex-col gap-1 md:pl-16">
+      <address class="flex flex-col gap-1 md:pl-16 not-italic">
         <p
           class="text-[11px] uppercase tracking-[0.25em] text-white/30 font-semibold mb-5"
         >
@@ -93,9 +91,10 @@ const yearRange = year > startYear ? `${startYear}–${year}` : `${startYear}`;
           contactInfo.map((info) => (
             <a
               href={info.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={isExternalLink(info.href) ? "_blank" : undefined}
+              rel={isExternalLink(info.href) ? "noopener noreferrer" : undefined}
               class="contact-item flex items-center gap-4 px-4 py-4 rounded-xl group transition-all duration-300 hover:bg-white/5"
+              aria-label={`${info.label}: ${info.value}`}
             >
               <span class="w-12 h-12 rounded-xl bg-white/6 flex items-center justify-center text-white/40 group-hover:bg-primary group-hover:text-white transition-all duration-300 shrink-0">
                 <Icon name={info.icon} size={20} />
@@ -111,7 +110,7 @@ const yearRange = year > startYear ? `${startYear}–${year}` : `${startYear}`;
             </a>
           ))
         }
-      </div>
+      </address>
     </div>
   </div>
 </section>

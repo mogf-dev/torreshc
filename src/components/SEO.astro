@@ -3,33 +3,78 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  imageAlt?: string;
   canonicalURL?: string;
-  type?: 'website' | 'article';
+  type?: "website" | "article";
 }
 
 const {
   title,
   description,
-  image = '/favicon.svg',
+  image = "/og-image.png",
+  imageAlt = "Torres Home remodeling and construction brand preview",
   canonicalURL = Astro.url.href,
-  type = 'website',
+  type = "website",
 } = Astro.props;
 
-const siteUrl = 'https://torreshc.com';
-const absoluteImage = image.startsWith('http') ? image : new URL(image, siteUrl).href;
-const formattedTitle = `${title} | Torres Home`;
+const siteUrl = Astro.site?.href ?? "https://torreshc.com";
+const canonicalHref = canonicalURL.startsWith("http")
+  ? canonicalURL
+  : new URL(canonicalURL, siteUrl).href;
+const absoluteImage = image.startsWith("http")
+  ? image
+  : new URL(image, siteUrl).href;
+const formattedTitle =
+  title.trim() === "Torres Home" ? title : `${title} | Torres Home`;
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: "Torres Home",
+  url: siteUrl,
+  description,
+  image: absoluteImage,
+  logo: new URL("/favicon.svg", siteUrl).href,
+  telephone: "+1-704-968-8289",
+  email: "info@torreshc.com",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "NC",
+    addressCountry: "US",
+  },
+  areaServed: [
+    {
+      "@type": "State",
+      name: "North Carolina",
+    },
+  ],
+  sameAs: [
+    "https://www.facebook.com/jeanpaul.ocampotorres",
+    "https://www.instagram.com/jpaul.torres",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Torres Home",
+  url: siteUrl,
+  description,
+};
 ---
 
+<title>{formattedTitle}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonicalURL} />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href={canonicalHref} />
 
 <meta property="og:type" content={type} />
-<meta property="og:url" content={canonicalURL} />
+<meta property="og:url" content={canonicalHref} />
 <meta property="og:title" content={formattedTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={absoluteImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
 <meta property="og:site_name" content="Torres Home" />
 <meta property="og:locale" content="en_US" />
 
@@ -37,43 +82,14 @@ const formattedTitle = `${title} | Torres Home`;
 <meta name="twitter:title" content={formattedTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={absoluteImage} />
+<meta name="twitter:image:alt" content={imageAlt} />
 
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Torres Home",
-  "url": siteUrl,
-  "description": description,
-  "telephone": "+1-704-968-8289",
-  "email": "info@torreshc.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressRegion": "NC",
-    "addressCountry": "US"
-  },
-  "areaServed": {
-    "@type": "State",
-    "name": "North Carolina"
-  },
-  "priceRange": "$$",
-  "image": absoluteImage,
-  "sameAs": [
-    "https://www.facebook.com/jeanpaul.ocampotorres",
-    "https://www.instagram.com/jpaul.torres"
-  ]
-})} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(organizationSchema)}
+/>
 
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Torres Home",
-  "url": siteUrl,
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": `${siteUrl}/?s={search_term_string}`
-    },
-    "query-input": "required name=search_term_string"
-  }
-})} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(websiteSchema)}
+/>
