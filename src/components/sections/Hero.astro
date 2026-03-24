@@ -113,6 +113,10 @@ const stats = [
         <img
           src={photos[0].src}
           alt={photos[0].alt}
+          width={400}
+          height={600}
+          loading="eager"
+          fetchpriority="high"
           class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div
@@ -128,6 +132,10 @@ const stats = [
           <img
             src={photos[1].src}
             alt={photos[1].alt}
+            width={300}
+            height={300}
+            loading="lazy"
+            decoding="async"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div
@@ -142,6 +150,10 @@ const stats = [
           <img
             src={photos[2].src}
             alt={photos[2].alt}
+            width={300}
+            height={300}
+            loading="lazy"
+            decoding="async"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div

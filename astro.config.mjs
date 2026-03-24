@@ -3,6 +3,10 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 export default defineConfig({
+  site: "https://torreshc.com",
+  build: {
+    inlineStylesheets: "auto",
+  },
   vite: {
     plugins: [tailwindcss()],
     resolve: {
