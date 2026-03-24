@@ -45,7 +45,7 @@ const iconColor =
     variant === "dark" && (
       <div
         class="absolute inset-0 opacity-5 pointer-events-none"
-        style="background: radial-gradient(circle at top right, #D97706 0%, transparent 60%);"
+        style="background: radial-gradient(circle at top right, var(--color-primary) 0%, transparent 60%);"
       />
     )
   }
@@ -90,7 +90,7 @@ const iconColor =
       <div class="relative z-10 mt-auto">
         <p
           class:list={[
-            "text-5xl font-black tracking-tighter leading-none",
+            "text-5xl font-black tracking-tight leading-none",
             variant === "default" ? "text-primary" : "text-white",
           ]}
         >

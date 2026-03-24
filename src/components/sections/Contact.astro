@@ -15,8 +15,8 @@ interface ContactItem {
 const contactInfo: ContactItem[] = [
   {
     label: "Call us",
-    value: "704 277 5688",
-    href: "tel:+17042775688",
+    value: "704 968 8289",
+    href: "tel:+17049688289",
     icon: "phone",
   },
   {
@@ -40,9 +40,17 @@ const yearRange = year > startYear ? `${startYear}–${year}` : `${startYear}`;
 
 <section id="contact" class="bg-dark text-white relative overflow-hidden">
   <!-- Subtle ambient -->
-  <div class="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none opacity-30" style="background:radial-gradient(ellipse at top right, rgba(221,38,25,0.15) 0%, transparent 60%);"></div>
-  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] pointer-events-none opacity-20" style="background:radial-gradient(ellipse at bottom left, rgba(255,255,255,0.05) 0%, transparent 60%);"></div>
-  
+  <div
+    class="absolute top-0 right-0 w-150 h-150 pointer-events-none opacity-30"
+    style="background:radial-gradient(ellipse at top right, rgba(221,38,25,0.15) 0%, transparent 60%);"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 left-0 w-100 h-100 pointer-events-none opacity-20"
+    style="background:radial-gradient(ellipse at bottom left, rgba(255,255,255,0.05) 0%, transparent 60%);"
+  >
+  </div>
+
   <!-- Main content -->
   <div class="max-w-7xl mx-auto px-5 md:px-10 py-20 relative z-10">
     <div class="grid md:grid-cols-2 gap-16 md:gap-0">
@@ -54,19 +62,21 @@ const yearRange = year > startYear ? `${startYear}–${year}` : `${startYear}`;
           excellence since 2022.
         </p>
         <div>
-          <p class="text-[10px] uppercase text-white/30 font-semibold mb-5">
+          <p
+            class="text-[11px] uppercase tracking-[0.25em] text-white/30 font-semibold mb-5"
+          >
             Follow us
           </p>
           <div class="flex items-center gap-2">
             <IconLink
-              name="instagram"
-              href="https://instagram.com"
-              label="Instagram"
+              name="facebook"
+              href="https://www.facebook.com/jeanpaul.ocampotorres"
+              label="Facebook"
             />
             <IconLink
-              name="facebook"
-              href="https://facebook.com"
-              label="Facebook"
+              name="instagram"
+              href="https://www.instagram.com/jpaul.torres"
+              label="Instagram"
             />
           </div>
         </div>
@@ -75,7 +85,7 @@ const yearRange = year > startYear ? `${startYear}–${year}` : `${startYear}`;
       <!-- Right: contact items -->
       <div class="flex flex-col gap-1 md:pl-16">
         <p
-          class="text-[10px] uppercase tracking-[0.2em] text-white/30 font-semibold mb-5"
+          class="text-[11px] uppercase tracking-[0.25em] text-white/30 font-semibold mb-5"
         >
           Contact
         </p>

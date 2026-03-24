@@ -17,8 +17,7 @@ const categories = [
 
 <section id="gallery" class="py-24 bg-white relative overflow-hidden">
   <!-- Ambient gradient -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-100 pointer-events-none opacity-30" style="background:radial-gradient(ellipse at center, rgba(221,38,25,0.1) 0%, transparent 70%);"></div>
-  
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-100 pointer-events-none opacity-30" style="background:radial-gradient(ellipse at center, rgba(221,38,25,0.3) 0%, transparent 70%);"></div>
   <div class="max-w-7xl mx-auto px-5 md:px-10 flex flex-col gap-12 relative z-10">
     <!-- Header -->
     <div
@@ -282,9 +281,9 @@ const categories = [
   }
   .filter-btn:hover,
   .filter-btn.active {
-    background: #111111;
-    border-color: #111111;
-    color: #ffffff;
+    background: var(--color-dark);
+    border-color: var(--color-dark);
+    color: var(--color-surface);
   }
 
   /* Blur only on desktop */

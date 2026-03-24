@@ -2,7 +2,7 @@
 import Icon from "./Icon.astro";
 
 interface Props {
-  phone: string; // e.g. "17042775688"
+  phone: string;
   message?: string;
 }
 
@@ -31,16 +31,16 @@ const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 <style>
   /* Default: dark button (on light sections) */
   .whatsapp-btn {
-    background-color: #111111;
-    color: #ffffff;
+    background-color: var(--color-dark);
+    color: var(--color-surface);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
   }
 
   /* On dark sections: flip to surface (white) */
   .whatsapp-btn.on-dark {
-    background-color: #ffffff;
-    color: #111111;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    background-color: var(--color-surface);
+    color: var(--color-dark);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
   }
 </style>
 
