@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import "@/styles/theme.css";
 
 import "@fontsource/dm-serif-display";
+import "@fontsource-variable/manrope/wght.css";
 import SEO from "@/components/SEO.astro";
 
 interface Props {
@@ -25,23 +26,19 @@ const {
     <meta name="color-scheme" content="light" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      />
-    </noscript>
     <meta name="generator" content={Astro.generator} />
     <SEO title={title} description={description} />
+    <title>Torres Home</title>
+    <meta property="og:title" content="Torres HC" />
+    <meta property="og:description" content="Tu descripción aquí" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://torreshc.vercel.app/" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:image" content="/og-image.png" />
   </head>
+
   <body>
     <a
       href="#main-content"
