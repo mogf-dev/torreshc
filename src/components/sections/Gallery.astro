@@ -34,10 +34,20 @@ const categories = [
 ] as const;
 ---
 
-<section id="gallery" class="py-24 bg-white relative overflow-hidden" style="content-visibility: auto; contain-intrinsic-size: 1px 800px;">
+<section
+  id="gallery"
+  class="py-24 bg-white relative overflow-hidden"
+  style="content-visibility: auto; contain-intrinsic-size: 1px 800px;"
+>
   <!-- Ambient gradient -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-100 pointer-events-none opacity-30" style="background:radial-gradient(ellipse at center, rgba(221,38,25,0.2) 0%, transparent 70%);"></div>
-  <div class="max-w-7xl mx-auto px-5 md:px-10 flex flex-col gap-12 relative z-10">
+  <div
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-150 h-100 pointer-events-none opacity-30"
+    style="background:radial-gradient(ellipse at center, rgba(221,38,25,0.2) 0%, transparent 70%);"
+  >
+  </div>
+  <div
+    class="max-w-7xl mx-auto px-5 md:px-10 flex flex-col gap-12 relative z-10"
+  >
     <!-- Header -->
     <div
       class="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
@@ -82,7 +92,10 @@ const categories = [
               <span class="absolute top-3 left-3 px-2.5 py-0.5 bg-white/90 text-dark text-[11px] font-semibold rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
                 {item.category}
               </span>
-              <div class="absolute top-0 right-0 w-12 h-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background:linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.3) 50%);"></div>
+              <div
+                class="absolute top-0 right-0 w-12 h-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style="background:linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.3) 50%);"
+              />
             </div>
           ))
         }
@@ -98,9 +111,7 @@ const categories = [
 
     <!-- CTA -->
     <div class="flex justify-center -mt-4">
-      <Button
-        id="open-gallery-btn"
-      >
+      <Button id="open-gallery-btn">
         View all projects
         <svg
           width="16"
@@ -150,8 +161,11 @@ const categories = [
         class="flex items-center justify-between px-8 py-5 border-b border-dark/8 bg-linear-to-b from-dark/2 to-transparent"
       >
         <div class="flex items-center gap-3">
-          <h2 class="text-lg font-semibold text-dark tracking-tight">Gallery</h2>
-          <span class="inline-block w-px h-6 bg-dark/30 mx-2 align-middle"></span>
+          <h2 class="text-lg font-semibold text-dark tracking-tight">
+            Gallery
+          </h2>
+          <span class="inline-block w-px h-6 bg-dark/30 mx-2 align-middle"
+          ></span>
           <div class="flex flex-wrap gap-2" id="modal-filters-desktop"></div>
         </div>
         <button
@@ -180,8 +194,12 @@ const categories = [
         <div
           class="columns-2 lg:columns-3 xl:columns-4 gap-5 space-y-5"
           id="modal-grid-desktop"
-        ></div>
-        <div id="load-more-trigger" class="h-20 flex items-center justify-center">
+        >
+        </div>
+        <div
+          id="load-more-trigger"
+          class="h-20 flex items-center justify-center"
+        >
           <span class="text-dark/60 text-sm">Loading more...</span>
         </div>
       </div>
@@ -206,20 +224,24 @@ const categories = [
       class="filters-mobile flex items-center gap-2 px-4 pb-3 border-b border-dark/8 shrink-0 overflow-x-auto"
       id="modal-filters-mobile"
       style="-webkit-overflow-scrolling:touch;"
-    ></div>
+    >
+    </div>
     <div
       class="flex-1 overflow-y-auto px-4 py-4"
       style="-webkit-overflow-scrolling:touch;"
     >
       <div class="columns-2 gap-3 space-y-3" id="modal-grid-mobile"></div>
-      <div id="load-more-trigger-mobile" class="h-16 flex items-center justify-center">
+      <div
+        id="load-more-trigger-mobile"
+        class="h-16 flex items-center justify-center"
+      >
         <span class="text-dark/60 text-sm">Loading more...</span>
       </div>
     </div>
     <div class="shrink-0 px-4 py-4 border-t border-dark/8">
       <button
         id="close-mobile"
-        class="w-full py-4 min-h-[48px] bg-dark text-white text-sm font-semibold rounded-xl hover:bg-dark/85 transition-colors"
+        class="w-full py-4 min-h-12 bg-dark text-white text-sm font-semibold rounded-xl hover:bg-dark/85 transition-colors"
       >
         Close
       </button>
@@ -229,12 +251,28 @@ const categories = [
 
 <!-- Template for gallery item -->
 <template id="gallery-item-template">
-  <div class="modal-item break-inside-avoid overflow-hidden rounded-xl group relative" style="aspect-ratio: 3/4;">
-    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width="300" height="400" alt="" />
-    <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition-all duration-300 flex items-end p-3">
-      <span class="text-white text-xs font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"></span>
+  <div
+    class="modal-item break-inside-avoid overflow-hidden rounded-xl group relative"
+    style="aspect-ratio: 3/4;"
+  >
+    <img
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+      decoding="async"
+      width="300"
+      height="400"
+      alt=""
+    />
+    <div
+      class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition-all duration-300 flex items-end p-3"
+    >
+      <span
+        class="text-white text-xs font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
+      ></span>
     </div>
-    <span class="absolute top-2 left-2 px-2 py-0.5 bg-white/90 text-dark text-[10px] font-semibold rounded-full"></span>
+    <span
+      class="absolute top-2 left-2 px-2 py-0.5 bg-white/90 text-dark text-[10px] font-semibold rounded-full"
+    ></span>
   </div>
 </template>
 
@@ -310,26 +348,35 @@ const categories = [
 
   /* Image skeleton shimmer */
   .modal-item {
-    background: linear-gradient(110deg, rgba(17, 17, 17, 0.03) 8%, rgba(17, 17, 17, 0.08) 18%, rgba(17, 17, 17, 0.03) 33%);
+    background: linear-gradient(
+      110deg,
+      rgba(17, 17, 17, 0.03) 8%,
+      rgba(17, 17, 17, 0.08) 18%,
+      rgba(17, 17, 17, 0.03) 33%
+    );
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite linear;
   }
-  
+
   .modal-item img.loaded {
     animation: none;
     background: transparent;
   }
 
   @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
   }
 
   .modal-item img {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
+
   .modal-item img.loaded {
     opacity: 1;
   }
@@ -344,49 +391,256 @@ const categories = [
   }
 
   const GALLERY_DATA: GalleryItem[] = [
-    { id: 1, src: "/images/01.webp", alt: "New drywall panels installed in residential room", category: "Drywall" },
-    { id: 2, src: "/images/02.webp", alt: "Custom wood trim and molding detail in living area", category: "Carpentry" },
-    { id: 3, src: "/images/03.webp", alt: "Fresh interior paint — warm neutral tones in living room", category: "Painting" },
-    { id: 4, src: "/images/04.webp", alt: "Full kitchen and living area renovation completed", category: "Renovations" },
-    { id: 5, src: "/images/05.webp", alt: "Accent wall painted in deep color — bedroom project", category: "Painting" },
-    { id: 6, src: "/images/06.webp", alt: "Bathroom gut renovation with new fixtures and tile", category: "Renovations" },
-    { id: 7, src: "/images/07.webp", alt: "Luxury vinyl plank flooring installed in open living space", category: "Flooring" },
-    { id: 8, src: "/images/08.webp", alt: "Large-format porcelain tile laid in modern kitchen", category: "Flooring" },
-    { id: 9, src: "/images/09.webp", alt: "Built-in cabinetry and shelving unit in home office", category: "Carpentry" },
-    { id: 10, src: "/images/10.webp", alt: "Hardwood flooring refinished and reinstalled in hallway", category: "Flooring" },
-    { id: 11, src: "/images/11.webp", alt: "Wide-plank engineered wood flooring in master bedroom", category: "Flooring" },
-    { id: 12, src: "/images/12.webp", alt: "Floating shelves and custom closet built-ins installed", category: "Carpentry" },
-    { id: 13, src: "/images/13.webp", alt: "Two-tone exterior paint — house refresh in NC neighborhood", category: "Painting" },
-    { id: 14, src: "/images/14.webp", alt: "Open-concept renovation — walls removed and space opened up", category: "Renovations" },
-    { id: 15, src: "/images/15.webp", alt: "Staircase railing and newel post carpentry detail", category: "Carpentry" },
-    { id: 16, src: "/images/16.webp", alt: "Master bath renovation with freestanding tub and tile surround", category: "Renovations" },
-    { id: 17, src: "/images/17.webp", alt: "Laundry room remodel with new cabinetry and flooring", category: "Renovations" },
-    { id: 18, src: "/images/18.webp", alt: "Herringbone tile pattern in entryway floor", category: "Flooring" },
-    { id: 19, src: "/images/19.webp", alt: "Complete home renovation — before and after main living area", category: "Renovations" },
-    { id: 20, src: "/images/20.webp", alt: "Smooth Level 5 drywall finish in new construction home", category: "Drywall" },
-    { id: 21, src: "/images/21.webp", alt: "Commercial space renovation — office buildout in Charlotte", category: "Renovations" },
-    { id: 22, src: "/images/22.webp", alt: "Bedroom addition renovation with new windows and drywall", category: "Renovations" },
-    { id: 23, src: "/images/23.webp", alt: "Crisp white paint refresh — trim and walls in family room", category: "Painting" },
-    { id: 24, src: "/images/24.webp", alt: "Crown molding installation in formal dining room", category: "Carpentry" },
-    { id: 25, src: "/images/25.webp", alt: "Drywall patched and finished after plumbing repair", category: "Drywall" },
-    { id: 26, src: "/images/26.webp", alt: "Exterior trim painted and refreshed on colonial-style home", category: "Painting" },
-    { id: 27, src: "/images/27.webp", alt: "Kids room painted with custom color and accent detail", category: "Painting" },
-    { id: 28, src: "/images/28.webp", alt: "Ceiling drywall installed and textured in basement conversion", category: "Drywall" },
-    { id: 29, src: "/images/29.webp", alt: "Kitchen cabinet doors and drawer fronts replaced and refinished", category: "Carpentry" },
-    { id: 30, src: "/images/30.webp", alt: "Garage interior painted floor to ceiling — clean bright finish", category: "Painting" },
-    { id: 31, src: "/images/31.webp", alt: "Wainscoting panels and chair rail installed in dining area", category: "Carpentry" },
-    { id: 32, src: "/images/32.webp", alt: "Corner bead and joint compound applied for clean drywall seams", category: "Drywall" },
-    { id: 33, src: "/images/33.webp", alt: "Stairwell and foyer painted with contrasting trim color", category: "Painting" },
-    { id: 34, src: "/images/34.webp", alt: "Stone look tile installed in bathroom floor and shower", category: "Flooring" },
-    { id: 35, src: "/images/35.webp", alt: "Drywall hung and taped in new home addition", category: "Drywall" },
-    { id: 36, src: "/images/36.webp", alt: "Outdoor patio tile installation — slip-resistant surface", category: "Flooring" },
-    { id: 37, src: "/images/37.webp", alt: "Arched drywall opening finished smooth between living spaces", category: "Drywall" },
-    { id: 38, src: "/images/38.webp", alt: "Drywall repair after water damage — seamless finish achieved", category: "Drywall" },
-    { id: 39, src: "/images/39.webp", alt: "Mosaic tile detail in shower niche and floor", category: "Flooring" },
-    { id: 40, src: "/images/40.webp", alt: "Custom mudroom built-ins with bench, hooks and storage cubbies", category: "Carpentry" },
+    {
+      id: 1,
+      src: "/images/01.webp",
+      alt: "New drywall panels installed in residential room",
+      category: "Drywall",
+    },
+    {
+      id: 2,
+      src: "/images/02.webp",
+      alt: "Custom wood trim and molding detail in living area",
+      category: "Carpentry",
+    },
+    {
+      id: 3,
+      src: "/images/03.webp",
+      alt: "Fresh interior paint — warm neutral tones in living room",
+      category: "Painting",
+    },
+    {
+      id: 4,
+      src: "/images/04.webp",
+      alt: "Full kitchen and living area renovation completed",
+      category: "Renovations",
+    },
+    {
+      id: 5,
+      src: "/images/05.webp",
+      alt: "Accent wall painted in deep color — bedroom project",
+      category: "Painting",
+    },
+    {
+      id: 6,
+      src: "/images/06.webp",
+      alt: "Bathroom gut renovation with new fixtures and tile",
+      category: "Renovations",
+    },
+    {
+      id: 7,
+      src: "/images/07.webp",
+      alt: "Luxury vinyl plank flooring installed in open living space",
+      category: "Flooring",
+    },
+    {
+      id: 8,
+      src: "/images/08.webp",
+      alt: "Large-format porcelain tile laid in modern kitchen",
+      category: "Flooring",
+    },
+    {
+      id: 9,
+      src: "/images/09.webp",
+      alt: "Built-in cabinetry and shelving unit in home office",
+      category: "Carpentry",
+    },
+    {
+      id: 10,
+      src: "/images/10.webp",
+      alt: "Hardwood flooring refinished and reinstalled in hallway",
+      category: "Flooring",
+    },
+    {
+      id: 11,
+      src: "/images/11.webp",
+      alt: "Wide-plank engineered wood flooring in master bedroom",
+      category: "Flooring",
+    },
+    {
+      id: 12,
+      src: "/images/12.webp",
+      alt: "Floating shelves and custom closet built-ins installed",
+      category: "Carpentry",
+    },
+    {
+      id: 13,
+      src: "/images/13.webp",
+      alt: "Two-tone exterior paint — house refresh in NC neighborhood",
+      category: "Painting",
+    },
+    {
+      id: 14,
+      src: "/images/14.webp",
+      alt: "Open-concept renovation — walls removed and space opened up",
+      category: "Renovations",
+    },
+    {
+      id: 15,
+      src: "/images/15.webp",
+      alt: "Staircase railing and newel post carpentry detail",
+      category: "Carpentry",
+    },
+    {
+      id: 16,
+      src: "/images/16.webp",
+      alt: "Master bath renovation with freestanding tub and tile surround",
+      category: "Renovations",
+    },
+    {
+      id: 17,
+      src: "/images/17.webp",
+      alt: "Laundry room remodel with new cabinetry and flooring",
+      category: "Renovations",
+    },
+    {
+      id: 18,
+      src: "/images/18.webp",
+      alt: "Herringbone tile pattern in entryway floor",
+      category: "Flooring",
+    },
+    {
+      id: 19,
+      src: "/images/19.webp",
+      alt: "Complete home renovation — before and after main living area",
+      category: "Renovations",
+    },
+    {
+      id: 20,
+      src: "/images/20.webp",
+      alt: "Smooth Level 5 drywall finish in new construction home",
+      category: "Drywall",
+    },
+    {
+      id: 21,
+      src: "/images/21.webp",
+      alt: "Commercial space renovation — office buildout in Charlotte",
+      category: "Renovations",
+    },
+    {
+      id: 22,
+      src: "/images/22.webp",
+      alt: "Bedroom addition renovation with new windows and drywall",
+      category: "Renovations",
+    },
+    {
+      id: 23,
+      src: "/images/23.webp",
+      alt: "Crisp white paint refresh — trim and walls in family room",
+      category: "Painting",
+    },
+    {
+      id: 24,
+      src: "/images/24.webp",
+      alt: "Crown molding installation in formal dining room",
+      category: "Carpentry",
+    },
+    {
+      id: 25,
+      src: "/images/25.webp",
+      alt: "Drywall patched and finished after plumbing repair",
+      category: "Drywall",
+    },
+    {
+      id: 26,
+      src: "/images/26.webp",
+      alt: "Exterior trim painted and refreshed on colonial-style home",
+      category: "Painting",
+    },
+    {
+      id: 27,
+      src: "/images/27.webp",
+      alt: "Kids room painted with custom color and accent detail",
+      category: "Painting",
+    },
+    {
+      id: 28,
+      src: "/images/28.webp",
+      alt: "Ceiling drywall installed and textured in basement conversion",
+      category: "Drywall",
+    },
+    {
+      id: 29,
+      src: "/images/29.webp",
+      alt: "Kitchen cabinet doors and drawer fronts replaced and refinished",
+      category: "Carpentry",
+    },
+    {
+      id: 30,
+      src: "/images/30.webp",
+      alt: "Garage interior painted floor to ceiling — clean bright finish",
+      category: "Painting",
+    },
+    {
+      id: 31,
+      src: "/images/31.webp",
+      alt: "Wainscoting panels and chair rail installed in dining area",
+      category: "Carpentry",
+    },
+    {
+      id: 32,
+      src: "/images/32.webp",
+      alt: "Corner bead and joint compound applied for clean drywall seams",
+      category: "Drywall",
+    },
+    {
+      id: 33,
+      src: "/images/33.webp",
+      alt: "Stairwell and foyer painted with contrasting trim color",
+      category: "Painting",
+    },
+    {
+      id: 34,
+      src: "/images/34.webp",
+      alt: "Stone look tile installed in bathroom floor and shower",
+      category: "Flooring",
+    },
+    {
+      id: 35,
+      src: "/images/35.webp",
+      alt: "Drywall hung and taped in new home addition",
+      category: "Drywall",
+    },
+    {
+      id: 36,
+      src: "/images/36.webp",
+      alt: "Outdoor patio tile installation — slip-resistant surface",
+      category: "Flooring",
+    },
+    {
+      id: 37,
+      src: "/images/37.webp",
+      alt: "Arched drywall opening finished smooth between living spaces",
+      category: "Drywall",
+    },
+    {
+      id: 38,
+      src: "/images/38.webp",
+      alt: "Drywall repair after water damage — seamless finish achieved",
+      category: "Drywall",
+    },
+    {
+      id: 39,
+      src: "/images/39.webp",
+      alt: "Mosaic tile detail in shower niche and floor",
+      category: "Flooring",
+    },
+    {
+      id: 40,
+      src: "/images/40.webp",
+      alt: "Custom mudroom built-ins with bench, hooks and storage cubbies",
+      category: "Carpentry",
+    },
   ];
 
-  const CATEGORIES = ["All", "Drywall", "Painting", "Flooring", "Carpentry", "Renovations"];
+  const CATEGORIES = [
+    "All",
+    "Drywall",
+    "Painting",
+    "Flooring",
+    "Carpentry",
+    "Renovations",
+  ];
   const INITIAL_LOAD = 12;
   const BATCH_SIZE = 8;
 
@@ -407,27 +661,31 @@ const categories = [
   modal.style.display = "none";
 
   function getImagePath(src: string): string {
-    return src.startsWith('/') ? src : `/images/${src.replace('/images/', '')}`;
+    return src.startsWith("/") ? src : `/images/${src.replace("/images/", "")}`;
   }
 
   function createGalleryItem(item: GalleryItem): HTMLElement {
-    const template = document.getElementById("gallery-item-template") as HTMLTemplateElement;
+    const template = document.getElementById(
+      "gallery-item-template",
+    ) as HTMLTemplateElement;
     const clone = template.content.cloneNode(true) as DocumentFragment;
-    const container = clone.querySelector('.modal-item') as HTMLElement;
-    const img = clone.querySelector('img') as HTMLImageElement;
-    const badge = clone.querySelector('span:last-child') as HTMLSpanElement;
+    const container = clone.querySelector(".modal-item") as HTMLElement;
+    const img = clone.querySelector("img") as HTMLImageElement;
+    const badge = clone.querySelector("span:last-child") as HTMLSpanElement;
 
     container.dataset.cat = item.category;
     img.src = getImagePath(item.src);
     img.alt = item.alt;
-    const caption = clone.querySelector('.bg-dark\\/0\\+ span') as HTMLSpanElement;
+    const caption = clone.querySelector(
+      ".bg-dark\\/0\\+ span",
+    ) as HTMLSpanElement;
     if (caption) caption.textContent = item.alt;
     if (badge) badge.textContent = item.category;
 
     img.onload = () => {
-      img.classList.add('loaded');
-      container.style.background = 'transparent';
-      container.style.animation = 'none';
+      img.classList.add("loaded");
+      container.style.background = "transparent";
+      container.style.animation = "none";
     };
 
     return container;
@@ -441,9 +699,10 @@ const categories = [
     const filtersMobile = document.getElementById("modal-filters-mobile")!;
 
     CATEGORIES.forEach((cat, idx) => {
-      [filtersDesktop, filtersMobile].forEach(container => {
+      [filtersDesktop, filtersMobile].forEach((container) => {
         const btn = document.createElement("button");
-        btn.className = "filter-btn px-4 py-1.5 text-sm rounded-full border transition-all duration-200";
+        btn.className =
+          "filter-btn px-4 py-1.5 text-sm rounded-full border transition-all duration-200";
         btn.dataset.cat = cat;
         btn.setAttribute("aria-pressed", String(idx === 0));
         btn.setAttribute("aria-label", `Filter by ${cat}`);
@@ -461,24 +720,30 @@ const categories = [
     const desktopGrid = document.getElementById("modal-grid-desktop")!;
     const mobileGrid = document.getElementById("modal-grid-mobile")!;
 
-    desktopGrid.innerHTML = '';
-    mobileGrid.innerHTML = '';
+    desktopGrid.innerHTML = "";
+    mobileGrid.innerHTML = "";
 
-    const filtered = currentFilter === "All" 
-      ? GALLERY_DATA.slice(0, loadedCount)
-      : GALLERY_DATA.filter(item => item.category === currentFilter).slice(0, loadedCount);
+    const filtered =
+      currentFilter === "All"
+        ? GALLERY_DATA.slice(0, loadedCount)
+        : GALLERY_DATA.filter((item) => item.category === currentFilter).slice(
+            0,
+            loadedCount,
+          );
 
-    filtered.forEach(item => {
+    filtered.forEach((item) => {
       desktopGrid.appendChild(createGalleryItem(item));
       mobileGrid.appendChild(createGalleryItem(item));
     });
 
     const loadMoreDesktop = document.getElementById("load-more-trigger")!;
     const loadMoreMobile = document.getElementById("load-more-trigger-mobile")!;
-    const hasMore = currentFilter === "All" 
-      ? loadedCount < GALLERY_DATA.length 
-      : GALLERY_DATA.filter(item => item.category === currentFilter).length > loadedCount;
-    
+    const hasMore =
+      currentFilter === "All"
+        ? loadedCount < GALLERY_DATA.length
+        : GALLERY_DATA.filter((item) => item.category === currentFilter)
+            .length > loadedCount;
+
     loadMoreDesktop.style.display = hasMore ? "flex" : "none";
     loadMoreMobile.style.display = hasMore ? "flex" : "none";
   }
@@ -496,28 +761,28 @@ const categories = [
 
   function setupIntersectionObserver() {
     const options = { rootMargin: "200px" };
-    
-    ["load-more-trigger", "load-more-trigger-mobile"].forEach(id => {
+
+    ["load-more-trigger", "load-more-trigger-mobile"].forEach((id) => {
       const trigger = document.getElementById(id);
       if (!trigger) return;
-      
+
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) loadMore();
         });
       }, options);
-      
+
       observer.observe(trigger);
     });
   }
 
   function setupFilters() {
     const filterBtns = document.querySelectorAll(".filter-btn");
-    filterBtns.forEach(btn => {
+    filterBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         currentFilter = (btn as HTMLElement).dataset.cat || "All";
-        
-        filterBtns.forEach(b => {
+
+        filterBtns.forEach((b) => {
           const isActive = (b as HTMLElement).dataset.cat === currentFilter;
           b.classList.toggle("active", isActive);
           b.setAttribute("aria-pressed", String(isActive));
@@ -529,24 +794,28 @@ const categories = [
     });
   }
 
-  const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  const focusableSelector =
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
   let focusableElements: HTMLElement[] = [];
 
   function updateFocusableElements() {
-    const panel = window.innerWidth >= 768 
-      ? document.getElementById("gallery-panel-desktop") 
-      : document.getElementById("gallery-sheet");
+    const panel =
+      window.innerWidth >= 768
+        ? document.getElementById("gallery-panel-desktop")
+        : document.getElementById("gallery-sheet");
     if (panel) {
-      focusableElements = Array.from(panel.querySelectorAll<HTMLElement>(focusableSelector));
+      focusableElements = Array.from(
+        panel.querySelectorAll<HTMLElement>(focusableSelector),
+      );
     }
   }
 
   function trapFocus(e: KeyboardEvent) {
     if (e.key !== "Tab" || focusableElements.length === 0) return;
-    
+
     const first = focusableElements[0];
     const last = focusableElements[focusableElements.length - 1];
-    
+
     if (e.shiftKey && document.activeElement === first) {
       e.preventDefault();
       last.focus();
@@ -558,27 +827,29 @@ const categories = [
 
   function openModal() {
     injectModalContent();
-    
+
     savedScrollY = window.scrollY;
     document.body.style.top = `-${savedScrollY}px`;
     document.body.classList.add("modal-open");
     modal.style.display = "flex";
     backdrop.style.opacity = "1";
     backdrop.style.pointerEvents = "auto";
-    
+
     if (window.innerWidth < 768) {
       sheet.classList.add("open");
     }
 
     updateFocusableElements();
-    
+
     setTimeout(() => {
-      const activeBtn = document.querySelector(".filter-btn[data-cat='All']") as HTMLButtonElement;
+      const activeBtn = document.querySelector(
+        ".filter-btn[data-cat='All']",
+      ) as HTMLButtonElement;
       activeBtn?.click();
       updateFocusableElements();
       focusableElements[0]?.focus();
     }, 100);
-    
+
     document.addEventListener("keydown", trapFocus);
   }
 
