@@ -1,10 +1,29 @@
 ---
 import Section from "@ui/Section.astro";
-import { gallery } from "@data/gallery";
+import { gallery, type GalleryItem } from "@data/gallery";
 import Button from "../ui/Button.astro";
+import { Image } from "astro:assets";
+
+import img01 from "../../assets/images/01.webp";
+import img02 from "../../assets/images/02.webp";
+import img03 from "../../assets/images/03.webp";
+import img04 from "../../assets/images/04.webp";
+import img05 from "../../assets/images/05.webp";
+import img06 from "../../assets/images/06.webp";
+
+const galleryImages: Record<string, ImageMetadata> = {
+  "/images/01.webp": img01,
+  "/images/02.webp": img02,
+  "/images/03.webp": img03,
+  "/images/04.webp": img04,
+  "/images/05.webp": img05,
+  "/images/06.webp": img06,
+};
 
 const PREVIEW_COUNT = 6;
 const preview = gallery.slice(0, PREVIEW_COUNT);
+const MODAL_INITIAL_LOAD = 12;
+const MODAL_BATCH_SIZE = 8;
 const categories = [
   "All",
   "Drywall",
@@ -38,17 +57,22 @@ const categories = [
         class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"
       >
         {
-          preview.map((item) => (
+          preview.map((item, index) => (
             <div
-              class="preview-item break-inside-avoid overflow-hidden rounded-xl group relative cursor-pointer"
-              data-id={item.id}
+              class="preview-item break-inside-avoid overflow-hidden rounded-xl group relative"
+              style="aspect-ratio: 3/4;"
             >
-              <img
-                src={item.src}
+              <Image
+                src={galleryImages[item.src]}
                 alt={item.alt}
-                loading="lazy"
+                width={400}
+                height={533}
+                quality={75}
+                format="webp"
+                loading={index < 2 ? "eager" : "lazy"}
                 decoding="async"
-                class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
               <div class="absolute inset-0 bg-linear-to-t from-dark/70 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
                 <span class="text-white text-sm font-medium translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
@@ -58,7 +82,6 @@ const categories = [
               <span class="absolute top-3 left-3 px-2.5 py-0.5 bg-white/90 text-dark text-[11px] font-semibold rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
                 {item.category}
               </span>
-              <!-- Corner accent -->
               <div class="absolute top-0 right-0 w-12 h-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background:linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.3) 50%);"></div>
             </div>
           ))
@@ -98,8 +121,8 @@ const categories = [
 </section>
 
 <!-- ── LIGHTBOX MODAL ─────────────────────────────────────────────────── -->
+<!-- Deferred: content injected via JS when opened -->
 
-<!-- Backdrop: always in DOM -->
 <div
   id="gallery-backdrop"
   class="fixed inset-0 z-99 opacity-0 transition-opacity duration-500 gallery-backdrop pointer-events-none"
@@ -107,7 +130,6 @@ const categories = [
 >
 </div>
 
-<!-- Modal wrapper: hidden/flex toggle, no blur on this element -->
 <div
   id="gallery-modal"
   class="fixed inset-0 z-100 hidden"
@@ -115,7 +137,7 @@ const categories = [
   aria-modal="true"
   aria-label="Photo gallery"
 >
-  <!-- ── DESKTOP: centered panel (md+) ── -->
+  <!-- Desktop panel (injected on open) -->
   <div
     id="gallery-panel-desktop"
     class="hidden md:flex items-center justify-center w-full h-full p-8"
@@ -124,27 +146,13 @@ const categories = [
       class="bg-white rounded-3xl w-full max-w-6xl flex flex-col overflow-hidden shadow-2xl border border-dark/6"
       style="max-height:min(90dvh,90vh);"
     >
-      <!-- Header -->
       <div
         class="flex items-center justify-between px-8 py-5 border-b border-dark/8 bg-linear-to-b from-dark/2 to-transparent"
       >
         <div class="flex items-center gap-3">
           <h2 class="text-lg font-semibold text-dark tracking-tight">Gallery</h2>
           <span class="inline-block w-px h-6 bg-dark/30 mx-2 align-middle"></span>
-          <div class="flex flex-wrap gap-2" id="modal-filters-desktop">
-            {
-              categories.map((cat, idx) => (
-                <button
-                  class="filter-btn px-4 py-1.5 text-sm rounded-full border transition-all duration-200"
-                  data-cat={cat}
-                  aria-pressed={idx === 0}
-                  aria-label={`Filter by ${cat}`}
-                >
-                  {cat}
-                </button>
-              ))
-            }
-          </div>
+          <div class="flex flex-wrap gap-2" id="modal-filters-desktop"></div>
         </div>
         <button
           id="close-desktop"
@@ -168,49 +176,24 @@ const categories = [
           >
         </button>
       </div>
-
-      <!-- Grid -->
       <div class="flex-1 overflow-y-auto px-8 py-8 bg-dark/1">
         <div
           class="columns-2 lg:columns-3 xl:columns-4 gap-5 space-y-5"
           id="modal-grid-desktop"
-        >
-          {
-            gallery.map((item) => (
-              <div
-                class="modal-item break-inside-avoid overflow-hidden rounded-xl group relative"
-                data-cat={item.category}
-              >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  loading="lazy"
-                  decoding="async"
-                  class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition-all duration-300 flex items-end p-3">
-                  <span class="text-white text-xs font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    {item.alt}
-                  </span>
-                </div>
-                <span class="absolute top-2 left-2 px-2 py-0.5 bg-white/90 text-dark text-[10px] font-semibold rounded-full">
-                  {item.category}
-                </span>
-              </div>
-            ))
-          }
+        ></div>
+        <div id="load-more-trigger" class="h-20 flex items-center justify-center">
+          <span class="text-dark/40 text-sm">Loading more...</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ── MOBILE: bottom sheet (up to md) ── -->
+  <!-- Mobile sheet (injected on open) -->
   <div
     id="gallery-sheet"
     class="md:hidden absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl flex flex-col shadow-2xl"
     style="max-height:90dvh; height:90dvh;"
   >
-    <!-- Handle — tap or drag down to close -->
     <div
       id="sheet-handle"
       class="flex justify-center pt-3 pb-2 shrink-0 cursor-pointer active:opacity-60"
@@ -219,56 +202,20 @@ const categories = [
     >
       <div class="w-10 h-1 bg-dark/20 rounded-full"></div>
     </div>
-
-    <!-- Filters -->
     <div
       class="filters-mobile flex items-center gap-2 px-4 pb-3 border-b border-dark/8 shrink-0 overflow-x-auto"
       id="modal-filters-mobile"
       style="-webkit-overflow-scrolling:touch;"
-    >
-      {
-        categories.map((cat, idx) => (
-          <button
-            class="filter-btn shrink-0 px-4 py-1.5 text-sm rounded-full border transition-all duration-200"
-            data-cat={cat}
-            aria-pressed={idx === 0}
-            aria-label={`Filter by ${cat}`}
-          >
-            {cat}
-          </button>
-        ))
-      }
-    </div>
-
-    <!-- Grid -->
+    ></div>
     <div
       class="flex-1 overflow-y-auto px-4 py-4"
       style="-webkit-overflow-scrolling:touch;"
     >
-      <div class="columns-2 gap-3 space-y-3" id="modal-grid-mobile">
-        {
-          gallery.map((item) => (
-            <div
-              class="modal-item break-inside-avoid overflow-hidden rounded-xl group relative"
-              data-cat={item.category}
-            >
-              <img
-                src={item.src}
-                alt={item.alt}
-                loading="lazy"
-                decoding="async"
-                class="w-full h-auto object-cover"
-              />
-              <span class="absolute top-2 left-2 px-2 py-0.5 bg-white/90 text-dark text-[10px] font-semibold rounded-full">
-                {item.category}
-              </span>
-            </div>
-          ))
-        }
+      <div class="columns-2 gap-3 space-y-3" id="modal-grid-mobile"></div>
+      <div id="load-more-trigger-mobile" class="h-16 flex items-center justify-center">
+        <span class="text-dark/40 text-sm">Loading more...</span>
       </div>
     </div>
-
-    <!-- Close bar -->
     <div class="shrink-0 px-4 py-4 border-t border-dark/8">
       <button
         id="close-mobile"
@@ -279,6 +226,17 @@ const categories = [
     </div>
   </div>
 </div>
+
+<!-- Template for gallery item -->
+<template id="gallery-item-template">
+  <div class="modal-item break-inside-avoid overflow-hidden rounded-xl group relative" style="aspect-ratio: 3/4;">
+    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width="300" height="400" />
+    <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition-all duration-300 flex items-end p-3">
+      <span class="text-white text-xs font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"></span>
+    </div>
+    <span class="absolute top-2 left-2 px-2 py-0.5 bg-white/90 text-dark text-[10px] font-semibold rounded-full"></span>
+  </div>
+</template>
 
 <style>
   .preview-item {
@@ -298,11 +256,15 @@ const categories = [
     color: var(--color-surface);
   }
 
-  /* Blur estilo Apple - solo desktop */
+  /* Blur en desktop y móvil */
+  .gallery-backdrop {
+    backdrop-filter: blur(20px) saturate(180%) brightness(0.95);
+    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(0.95);
+  }
+
+  /* Solo en desktop permite clicks */
   @media (min-width: 768px) {
     .gallery-backdrop {
-      backdrop-filter: blur(20px) saturate(180%) brightness(0.95);
-      -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(0.95);
       pointer-events: auto;
     }
   }
@@ -345,9 +307,95 @@ const categories = [
     background: rgba(17, 17, 17, 0.22);
     border-radius: 2px;
   }
+
+  /* Image skeleton shimmer */
+  .modal-item {
+    background: linear-gradient(110deg, rgba(17, 17, 17, 0.03) 8%, rgba(17, 17, 17, 0.08) 18%, rgba(17, 17, 17, 0.03) 33%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+  
+  .modal-item img.loaded {
+    animation: none;
+    background: transparent;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .modal-item img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .modal-item img.loaded {
+    opacity: 1;
+  }
 </style>
 
 <script>
+  interface GalleryItem {
+    id: number;
+    src: string;
+    alt: string;
+    category: string;
+  }
+
+  const GALLERY_DATA: GalleryItem[] = [
+    { id: 1, src: "/images/01.webp", alt: "New drywall panels installed in residential room", category: "Drywall" },
+    { id: 2, src: "/images/02.webp", alt: "Custom wood trim and molding detail in living area", category: "Carpentry" },
+    { id: 3, src: "/images/03.webp", alt: "Fresh interior paint — warm neutral tones in living room", category: "Painting" },
+    { id: 4, src: "/images/04.webp", alt: "Full kitchen and living area renovation completed", category: "Renovations" },
+    { id: 5, src: "/images/05.webp", alt: "Accent wall painted in deep color — bedroom project", category: "Painting" },
+    { id: 6, src: "/images/06.webp", alt: "Bathroom gut renovation with new fixtures and tile", category: "Renovations" },
+    { id: 7, src: "/images/07.webp", alt: "Luxury vinyl plank flooring installed in open living space", category: "Flooring" },
+    { id: 8, src: "/images/08.webp", alt: "Large-format porcelain tile laid in modern kitchen", category: "Flooring" },
+    { id: 9, src: "/images/09.webp", alt: "Built-in cabinetry and shelving unit in home office", category: "Carpentry" },
+    { id: 10, src: "/images/10.webp", alt: "Hardwood flooring refinished and reinstalled in hallway", category: "Flooring" },
+    { id: 11, src: "/images/11.webp", alt: "Wide-plank engineered wood flooring in master bedroom", category: "Flooring" },
+    { id: 12, src: "/images/12.webp", alt: "Floating shelves and custom closet built-ins installed", category: "Carpentry" },
+    { id: 13, src: "/images/13.webp", alt: "Two-tone exterior paint — house refresh in NC neighborhood", category: "Painting" },
+    { id: 14, src: "/images/14.webp", alt: "Open-concept renovation — walls removed and space opened up", category: "Renovations" },
+    { id: 15, src: "/images/15.webp", alt: "Staircase railing and newel post carpentry detail", category: "Carpentry" },
+    { id: 16, src: "/images/16.webp", alt: "Master bath renovation with freestanding tub and tile surround", category: "Renovations" },
+    { id: 17, src: "/images/17.webp", alt: "Laundry room remodel with new cabinetry and flooring", category: "Renovations" },
+    { id: 18, src: "/images/18.webp", alt: "Herringbone tile pattern in entryway floor", category: "Flooring" },
+    { id: 19, src: "/images/19.webp", alt: "Complete home renovation — before and after main living area", category: "Renovations" },
+    { id: 20, src: "/images/20.webp", alt: "Smooth Level 5 drywall finish in new construction home", category: "Drywall" },
+    { id: 21, src: "/images/21.webp", alt: "Commercial space renovation — office buildout in Charlotte", category: "Renovations" },
+    { id: 22, src: "/images/22.webp", alt: "Bedroom addition renovation with new windows and drywall", category: "Renovations" },
+    { id: 23, src: "/images/23.webp", alt: "Crisp white paint refresh — trim and walls in family room", category: "Painting" },
+    { id: 24, src: "/images/24.webp", alt: "Crown molding installation in formal dining room", category: "Carpentry" },
+    { id: 25, src: "/images/25.webp", alt: "Drywall patched and finished after plumbing repair", category: "Drywall" },
+    { id: 26, src: "/images/26.webp", alt: "Exterior trim painted and refreshed on colonial-style home", category: "Painting" },
+    { id: 27, src: "/images/27.webp", alt: "Kids room painted with custom color and accent detail", category: "Painting" },
+    { id: 28, src: "/images/28.webp", alt: "Ceiling drywall installed and textured in basement conversion", category: "Drywall" },
+    { id: 29, src: "/images/29.webp", alt: "Kitchen cabinet doors and drawer fronts replaced and refinished", category: "Carpentry" },
+    { id: 30, src: "/images/30.webp", alt: "Garage interior painted floor to ceiling — clean bright finish", category: "Painting" },
+    { id: 31, src: "/images/31.webp", alt: "Wainscoting panels and chair rail installed in dining area", category: "Carpentry" },
+    { id: 32, src: "/images/32.webp", alt: "Corner bead and joint compound applied for clean drywall seams", category: "Drywall" },
+    { id: 33, src: "/images/33.webp", alt: "Stairwell and foyer painted with contrasting trim color", category: "Painting" },
+    { id: 34, src: "/images/34.webp", alt: "Stone look tile installed in bathroom floor and shower", category: "Flooring" },
+    { id: 35, src: "/images/35.webp", alt: "Drywall hung and taped in new home addition", category: "Drywall" },
+    { id: 36, src: "/images/36.webp", alt: "Outdoor patio tile installation — slip-resistant surface", category: "Flooring" },
+    { id: 37, src: "/images/37.webp", alt: "Arched drywall opening finished smooth between living spaces", category: "Drywall" },
+    { id: 38, src: "/images/38.webp", alt: "Drywall repair after water damage — seamless finish achieved", category: "Drywall" },
+    { id: 39, src: "/images/39.webp", alt: "Mosaic tile detail in shower niche and floor", category: "Flooring" },
+    { id: 40, src: "/images/40.webp", alt: "Custom mudroom built-ins with bench, hooks and storage cubbies", category: "Carpentry" },
+  ];
+
+  const CATEGORIES = ["All", "Drywall", "Painting", "Flooring", "Carpentry", "Renovations"];
+  const INITIAL_LOAD = 12;
+  const BATCH_SIZE = 8;
+
+  let savedScrollY = 0;
+  let loadedCount = INITIAL_LOAD;
+  let isLoading = false;
+  let modalContentInjected = false;
+  let currentFilter = "All";
+
   const openBtn = document.getElementById("open-gallery-btn")!;
   const modal = document.getElementById("gallery-modal")!;
   const backdrop = document.getElementById("gallery-backdrop")!;
@@ -355,16 +403,132 @@ const categories = [
   const sheetHandle = document.getElementById("sheet-handle")!;
   const closeDesktop = document.getElementById("close-desktop")!;
   const closeMobile = document.getElementById("close-mobile")!;
-  const filterBtns =
-    document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-  const modalItems = document.querySelectorAll<HTMLElement>(".modal-item");
 
-  let savedScrollY = 0;
-
-  // Start hidden
   modal.style.display = "none";
 
-  // Focus trap elements
+  function getImagePath(src: string): string {
+    return src.startsWith('/') ? src : `/images/${src.replace('/images/', '')}`;
+  }
+
+  function createGalleryItem(item: GalleryItem): HTMLElement {
+    const template = document.getElementById("gallery-item-template") as HTMLTemplateElement;
+    const clone = template.content.cloneNode(true) as DocumentFragment;
+    const container = clone.querySelector('.modal-item') as HTMLElement;
+    const img = clone.querySelector('img') as HTMLImageElement;
+    const badge = clone.querySelector('span:last-child') as HTMLSpanElement;
+
+    container.dataset.cat = item.category;
+    img.src = getImagePath(item.src);
+    img.alt = item.alt;
+    const caption = clone.querySelector('.bg-dark\\/0\\+ span') as HTMLSpanElement;
+    if (caption) caption.textContent = item.alt;
+    if (badge) badge.textContent = item.category;
+
+    img.onload = () => {
+      img.classList.add('loaded');
+      container.style.background = 'transparent';
+      container.style.animation = 'none';
+    };
+
+    return container;
+  }
+
+  function injectModalContent() {
+    if (modalContentInjected) return;
+    modalContentInjected = true;
+
+    const filtersDesktop = document.getElementById("modal-filters-desktop")!;
+    const filtersMobile = document.getElementById("modal-filters-mobile")!;
+
+    CATEGORIES.forEach((cat, idx) => {
+      [filtersDesktop, filtersMobile].forEach(container => {
+        const btn = document.createElement("button");
+        btn.className = "filter-btn px-4 py-1.5 text-sm rounded-full border transition-all duration-200";
+        btn.dataset.cat = cat;
+        btn.setAttribute("aria-pressed", String(idx === 0));
+        btn.setAttribute("aria-label", `Filter by ${cat}`);
+        btn.textContent = cat;
+        container.appendChild(btn);
+      });
+    });
+
+    renderGalleryItems();
+    setupIntersectionObserver();
+    setupFilters();
+  }
+
+  function renderGalleryItems() {
+    const desktopGrid = document.getElementById("modal-grid-desktop")!;
+    const mobileGrid = document.getElementById("modal-grid-mobile")!;
+
+    desktopGrid.innerHTML = '';
+    mobileGrid.innerHTML = '';
+
+    const filtered = currentFilter === "All" 
+      ? GALLERY_DATA.slice(0, loadedCount)
+      : GALLERY_DATA.filter(item => item.category === currentFilter).slice(0, loadedCount);
+
+    filtered.forEach(item => {
+      desktopGrid.appendChild(createGalleryItem(item));
+      mobileGrid.appendChild(createGalleryItem(item));
+    });
+
+    const loadMoreDesktop = document.getElementById("load-more-trigger")!;
+    const loadMoreMobile = document.getElementById("load-more-trigger-mobile")!;
+    const hasMore = currentFilter === "All" 
+      ? loadedCount < GALLERY_DATA.length 
+      : GALLERY_DATA.filter(item => item.category === currentFilter).length > loadedCount;
+    
+    loadMoreDesktop.style.display = hasMore ? "flex" : "none";
+    loadMoreMobile.style.display = hasMore ? "flex" : "none";
+  }
+
+  function loadMore() {
+    if (isLoading) return;
+    isLoading = true;
+
+    setTimeout(() => {
+      loadedCount += BATCH_SIZE;
+      renderGalleryItems();
+      isLoading = false;
+    }, 300);
+  }
+
+  function setupIntersectionObserver() {
+    const options = { rootMargin: "200px" };
+    
+    ["load-more-trigger", "load-more-trigger-mobile"].forEach(id => {
+      const trigger = document.getElementById(id);
+      if (!trigger) return;
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) loadMore();
+        });
+      }, options);
+      
+      observer.observe(trigger);
+    });
+  }
+
+  function setupFilters() {
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentFilter = (btn as HTMLElement).dataset.cat || "All";
+        
+        filterBtns.forEach(b => {
+          const isActive = (b as HTMLElement).dataset.cat === currentFilter;
+          b.classList.toggle("active", isActive);
+          b.setAttribute("aria-pressed", String(isActive));
+        });
+
+        loadedCount = INITIAL_LOAD;
+        renderGalleryItems();
+      });
+    });
+  }
+
   const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
   let focusableElements: HTMLElement[] = [];
 
@@ -392,8 +556,9 @@ const categories = [
     }
   }
 
-  // ── Open ───────────────────────────────────────────────
   function openModal() {
+    injectModalContent();
+    
     savedScrollY = window.scrollY;
     document.body.style.top = `-${savedScrollY}px`;
     document.body.classList.add("modal-open");
@@ -406,10 +571,10 @@ const categories = [
     }
 
     updateFocusableElements();
-    filterBtns[0]?.click();
     
-    // Focus first focusable element
     setTimeout(() => {
+      const activeBtn = document.querySelector(".filter-btn[data-cat='All']") as HTMLButtonElement;
+      activeBtn?.click();
       updateFocusableElements();
       focusableElements[0]?.focus();
     }, 100);
@@ -417,7 +582,6 @@ const categories = [
     document.addEventListener("keydown", trapFocus);
   }
 
-  // ── Close ──────────────────────────────────────────────
   function closeModal() {
     document.removeEventListener("keydown", trapFocus);
     backdrop.style.opacity = "0";
@@ -438,10 +602,8 @@ const categories = [
   closeDesktop.addEventListener("click", closeModal);
   closeMobile.addEventListener("click", closeModal);
 
-  // Handle tap → close
   sheetHandle.addEventListener("click", closeModal);
 
-  // Handle drag-down → close (touch)
   let dragStartY = 0;
   sheetHandle.addEventListener(
     "touchstart",
@@ -454,34 +616,16 @@ const categories = [
     "touchend",
     (e) => {
       const delta = e.changedTouches[0].clientY - dragStartY;
-      if (delta > 40) closeModal(); // swiped down 40px+
+      if (delta > 40) closeModal();
     },
     { passive: true },
   );
 
-  // Desktop backdrop click → close
   backdrop.addEventListener("click", () => {
     if (window.innerWidth >= 768) closeModal();
   });
 
-  // Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeModal();
-  });
-
-  // Filters
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const cat = btn.dataset.cat!;
-      filterBtns.forEach((b) => {
-        const isActive = b.dataset.cat === cat;
-        b.classList.toggle("active", isActive);
-        b.setAttribute("aria-pressed", String(isActive));
-      });
-      modalItems.forEach((item) => {
-        item.style.display =
-          cat === "All" || item.dataset.cat === cat ? "" : "none";
-      });
-    });
   });
 </script>

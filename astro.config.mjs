@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, sharpImageService } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import sitemap from "@astrojs/sitemap";
@@ -7,6 +7,9 @@ export default defineConfig({
   site: "https://torreshc.com",
   build: {
     inlineStylesheets: "auto",
+  },
+  image: {
+    service: sharpImageService(),
   },
   integrations: [sitemap()],
   vite: {

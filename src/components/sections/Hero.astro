@@ -1,18 +1,23 @@
 ---
 import Button from "@ui/Button.astro";
 import Badge from "@ui/Badge.astro";
+import { Image } from "astro:assets";
+
+import hero1 from "../../assets/images/01.webp";
+import hero2 from "../../assets/images/02.webp";
+import hero3 from "../../assets/images/03.webp";
 
 const photos = [
   {
-    src: "/images/01.webp",
+    src: hero1,
     alt: "New drywall panels installed in residential room",
   },
   {
-    src: "/images/02.webp",
+    src: hero2,
     alt: "Custom wood trim and molding detail in living area",
   },
   {
-    src: "/images/03.webp",
+    src: hero3,
     alt: "Fresh interior paint — warm neutral tones in living room",
   },
 ];
@@ -103,65 +108,74 @@ const stats = [
       </div>
     </div>
 
-    <div
-      class="hero-el hidden md:flex gap-4 w-160 xl:w-125"
-      style="--d:0.22s; height: min(700px, calc(100svh - 9rem));"
-    >
       <div
-        class="w-80 h-full rounded-4xl overflow-hidden shadow-[0_30px_80px_-24px_rgba(28,33,29,0.22)] relative group"
+        class="hero-el hidden md:flex gap-4 w-160 xl:w-125"
+        style="--d:0.22s; height: min(700px, calc(100svh - 9rem));"
       >
-        <img
-          src={photos[0].src}
-          alt={photos[0].alt}
-          width={400}
-          height={600}
-          loading="eager"
-          fetchpriority="high"
-          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
         <div
-          class="absolute inset-0 bg-linear-to-t from-dark/35 via-transparent to-white/8 opacity-100"
+          class="w-80 h-full rounded-4xl overflow-hidden shadow-[0_30px_80px_-24px_rgba(28,33,29,0.22)] relative group"
         >
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-4 w-60 h-full">
-        <div
-          class="h-1/2 rounded-4xl overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
-        >
-          <img
-            src={photos[1].src}
-            alt={photos[1].alt}
-            width={300}
-            height={300}
-            loading="lazy"
-            decoding="async"
+          <Image
+            src={photos[0].src}
+            alt={photos[0].alt}
+            width={800}
+            height={1200}
+            quality={80}
+            format="webp"
+            loading="eager"
+            fetchpriority="high"
+            sizes="(max-width: 768px) 100vw, 400px"
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div
-            class="absolute inset-0 bg-linear-to-t from-dark/30 to-transparent opacity-100"
+            class="absolute inset-0 bg-linear-to-t from-dark/35 via-transparent to-white/8 opacity-100"
           >
           </div>
         </div>
 
-        <div
-          class="h-1/2 rounded-4xl overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
-        >
-          <img
-            src={photos[2].src}
-            alt={photos[2].alt}
-            width={300}
-            height={300}
-            loading="lazy"
-            decoding="async"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
+        <div class="flex flex-col gap-4 w-60 h-full">
           <div
-            class="absolute inset-0 bg-linear-to-t from-dark/30 to-transparent opacity-100"
+            class="h-1/2 rounded-4xl overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
           >
+            <Image
+              src={photos[1].src}
+              alt={photos[1].alt}
+              width={600}
+              height={600}
+              quality={75}
+              format="webp"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 768px) 100vw, 300px"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div
+              class="absolute inset-0 bg-linear-to-t from-dark/30 to-transparent opacity-100"
+            >
+            </div>
+          </div>
+
+          <div
+            class="h-1/2 rounded-4xl overflow-hidden shadow-[0_22px_60px_-20px_rgba(28,33,29,0.18)] relative group"
+          >
+            <Image
+              src={photos[2].src}
+              alt={photos[2].alt}
+              width={600}
+              height={600}
+              quality={75}
+              format="webp"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 768px) 100vw, 300px"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div
+              class="absolute inset-0 bg-linear-to-t from-dark/30 to-transparent opacity-100"
+            >
+            </div>
           </div>
         </div>
-      </div>
 
       <div
         class="hero-badge-float absolute left-[30%] top-[55%] -translate-y-1/2 rounded-[1.4rem] border border-white/40 bg-surface/88 px-5 py-4 flex items-center gap-3 z-20 opacity-0 w-max shadow-[0_22px_60px_-26px_rgba(28,33,29,0.5)] backdrop-blur-md"
