@@ -4,7 +4,7 @@
   --status-warning:  #ed931b;
   --status-error:    #e53935;
   --status-info:     #0071e3; /*0071e3 4493f8 4493f8*/
-  --status-neutral:  #808ea2;
+  --status-neutral:  #5a6474; /* Darker for better contrast on white */
   --status-brand:    #c76b4a;
 }
 
