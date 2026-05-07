@@ -20,12 +20,12 @@ export const gallery: GalleryItem[] = [
     alt: "White shaker kitchen cabinets installed in an L-shaped layout",
     category: "Carpentry",
   },
-  {
-    id: 3,
-    src: "/images/03.webp",
-    alt: "Completed two-story home exterior with new siding, shutters, and front entry path",
-    category: "Renovations",
-  },
+    {
+      id: 3,
+      src: "/images/03.webp",
+      alt: "Sheathed exterior wall section under construction beside the main house",
+      category: "Carpentry",
+    },
   {
     id: 4,
     src: "/images/04.webp",
@@ -106,8 +106,8 @@ export const gallery: GalleryItem[] = [
   },
   {
     id: 17,
-    src: "/images/17.webp",
-    alt: "Newly finished two-story home exterior with fresh siding and front stoop detail",
+    src: "/images/7.webp",
+    alt: "Worker finishing a freshly poured concrete slab for a new build",
     category: "Renovations",
   },
   {
@@ -347,7 +347,7 @@ export const gallery: GalleryItem[] = [
   {
     id: 57,
     src: "/images/57.webp",
-    alt: "Completed kitchen and living area with light wood-look flooring",
+    alt: "Client reviewing architectural house plans during project planning",
     category: "Renovations",
   },
   {
@@ -431,8 +431,8 @@ export const gallery: GalleryItem[] = [
   {
     id: 71,
     src: "/images/71.webp",
-    alt: "Wrapped home exterior with ladder access during construction progress",
-    category: "Renovations",
+    alt: "Framed interior room with rough electrical ready for the next build phase",
+    category: "Carpentry",
   },
   {
     id: 72,
@@ -463,29 +463,5 @@ export const gallery: GalleryItem[] = [
     src: "/images/76.webp",
     alt: "Exterior home under construction with mixed wrap and installed siding",
     category: "Renovations",
-  },
-  {
-    id: 77,
-    src: "/images/77.webp",
-    alt: "Worker finishing a freshly poured concrete slab for a new build",
-    category: "Renovations",
-  },
-  {
-    id: 78,
-    src: "/images/78.webp",
-    alt: "Sheathed exterior wall section under construction beside the main house",
-    category: "Carpentry",
-  },
-  {
-    id: 79,
-    src: "/images/79.webp",
-    alt: "Client reviewing architectural house plans during project planning",
-    category: "Renovations",
-  },
-  {
-    id: 80,
-    src: "/images/80.webp",
-    alt: "Framed interior room with rough electrical ready for the next build phase",
-    category: "Carpentry",
   },
 ];
